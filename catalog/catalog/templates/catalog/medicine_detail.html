@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ medicine.name }}</title>
+    <title>{{ medicine.name }} - Medicine App</title>
 </head>
 <body>
     <h1>{{ medicine.name }}</h1>
-    <p><strong>Description:</strong> {{ medicine.description }}</p>
+    <p>{{ medicine.description }}</p>
     <p><strong>Price:</strong> ${{ medicine.price }}</p>
-    <p><strong>Category:</strong> {{ medicine.category.name }}</p>
+    <p><strong>Category:</strong> {{ medicine.category }}</p>
+    <a href="{% url 'home' %}">Back to Home</a>
 </body>
 </html>
