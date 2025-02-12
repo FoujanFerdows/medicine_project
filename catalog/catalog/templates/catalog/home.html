@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to the Medicine App</title>
+</head>
+<body>
+    <h1>Welcome to the Medicine App</h1>
+    <h2>Available Medicines</h2>
+    <ul>
+        {% for medicine in medicines %}
+            <li><a href="{% url 'medicine_detail' pk=medicine.pk %}">{{ medicine.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

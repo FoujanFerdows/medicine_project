@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 URL configuration for medicine_app project.
 
@@ -21,5 +22,13 @@ from . import views  # Import views from the current directory
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),  # Map the home view to the root URL
+=======
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),  
+    path('medicine/<int:pk>/', views.medicine_detail, name='medicine_detail'),  
+>>>>>>> dfed61eeda0b42f6377905e8e7b245bf0426f5f9
 ]
 
