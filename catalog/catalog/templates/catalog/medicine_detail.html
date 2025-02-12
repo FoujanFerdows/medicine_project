@@ -1,13 +1,13 @@
+<!-- medicine_detail.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>{{ medicine.name }} - Medicine App</title>
+    <meta charset="UTF-8">
+    <title>{{ medicine.name }}</title>
 </head>
 <body>
     <h1>{{ medicine.name }}</h1>
     <p>{{ medicine.description }}</p>
-    <p><strong>Price:</strong> ${{ medicine.price }}</p>
-    <p><strong>Category:</strong> {{ medicine.category }}</p>
-    <a href="{% url 'home' %}">Back to Home</a>
+    <p>Price: {{ medicine.price }}</p>
 </body>
 </html>
