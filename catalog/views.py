@@ -1,16 +1,21 @@
+# views.py
+
 from django.shortcuts import render
-from .models import Medicine
+from .models import Medicine  # Assuming you have a Medicine model
 
-# Home Page View (displays all medicines)
+# Home view
 def home(request):
-    medicines = Medicine.objects.all()  # Fetch all medicines from the database
-    return render(request, 'home.html', {'medicines': medicines})
+    return render(request, 'home.html')
 
-# Medicine Detail View (displays a single medicine's details)
+# Medicine detail view
 def medicine_detail(request, pk):
     try:
-        medicine = Medicine.objects.get(pk=pk)  # Fetch a single medicine by primary key
+        # Get the Medicine object based on the primary key
+        medicine = Medicine.objects.get(pk=pk)
     except Medicine.DoesNotExist:
-        medicine = None  # Handle case where medicine doesn't exist
+        # Handle the case where no medicine is found
+        return render(request, 'medicine_not_found.html')
+
     return render(request, 'medicine_detail.html', {'medicine': medicine})
+
 
