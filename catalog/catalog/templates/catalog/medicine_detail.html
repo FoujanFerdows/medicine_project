@@ -1,4 +1,4 @@
-<!-- medicine_detail.html -->
+<!-- templates/medicine_detail.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +7,14 @@
 </head>
 <body>
     <h1>{{ medicine.name }}</h1>
-    <p>{{ medicine.description }}</p>
-    <p>Price: {{ medicine.price }}</p>
+    <p><strong>Description:</strong> {{ medicine.description }}</p>
+    <p><strong>Active Ingredients:</strong> {{ medicine.active_ingredients }}</p>
+    <p><strong>Usage Instructions:</strong> {{ medicine.usage_instructions }}</p>
+    <p><strong>Side Effects:</strong> {{ medicine.side_effects }}</p>
+    <p><strong>Availability:</strong> {{ medicine.get_availability_display }}</p>
+    <p><strong>Price:</strong> ${{ medicine.price }}</p>
+    <p><strong>Category:</strong> {{ medicine.category.name }}</p>
+    <p><strong>Symptoms:</strong> {{ medicine.symptoms }}</p>
 </body>
 </html>
+
