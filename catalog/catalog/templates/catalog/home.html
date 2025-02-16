@@ -1,22 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to the Medicine App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .search-container input {
+            padding: 10px;
+            width: 300px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-container button {
+            padding: 10px 15px;
+            font-size: 1em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background-color: #45a049;
+        }
+
+        .medicine-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+
+        .medicine-list li {
+            background-color: #ffffff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .medicine-list li a {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .medicine-list li a:hover {
+            color: #4CAF50;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Medicine App</h1>
+
+    <header>
+        <h1>Welcome to the Medicine App</h1>
+    </header>
+
+    <div class="search-container">
+        <h2>Search for Medicines</h2>
+        <form method="get" action="{% url 'home' %}">
+            <input type="text" name="q" value="{{ search_query }}" placeholder="Search for medicines...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
     <h2>Available Medicines</h2>
 
-   
-    <form method="get" action="{% url 'home' %}">
-        <input type="text" name="q" value="{{ search_query }}" placeholder="Search for medicines...">
-        <button type="submit">Search</button>
-    </form>
-
-    <ul>
+    <ul class="medicine-list">
         {% for medicine in medicines %}
             <li><a href="{% url 'medicine_detail' pk=medicine.pk %}">{{ medicine.name }}</a></li>
         {% endfor %}
     </ul>
+
 </body>
 </html>
