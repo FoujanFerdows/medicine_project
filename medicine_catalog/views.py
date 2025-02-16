@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Medicine
+from catalog.models import Medicine
 
 def home(request):
     # Default to showing all medicines if no filter is applied
