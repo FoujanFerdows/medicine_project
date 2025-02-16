@@ -3,5 +3,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('catalog.urls')),  # This includes the URLs from the catalog app
+    path('', include('catalog.urls')),  # This includes the URLs from your 'catalog' app
 ]
