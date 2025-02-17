@@ -1,6 +1,6 @@
 from django.db import models
 
-# Category model
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -8,7 +8,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-# Medicine model
+
 class Medicine(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
