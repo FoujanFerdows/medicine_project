@@ -54,6 +54,7 @@
             height: 80vh;
             text-align: center;
             padding: 20px;
+            margin-top: 80px; /* Push content below the fixed top-bar */
         }
         .hero-title {
             font-size: 36px;
@@ -97,6 +98,9 @@
         }
         .medicine-list {
             margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .medicine-item {
             background: #f9f9f9;
@@ -104,6 +108,7 @@
             margin: 10px 0;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 80%;
         }
     </style>
 </head>
@@ -122,13 +127,16 @@
     <div class="hero-section">
         <div class="hero-title">We understand your needs</div>
         <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
+
+        <!-- Search Form -->
         <div class="search-box">
             <form method="get" action="/">
                 <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
                 <button type="submit">Search</button>
             </form>
         </div>
-
+        
+        <!-- Medicine Search Results -->
         <div class="medicine-list">
             {% if medicines %}
                 <h3>Search Results:</h3>
@@ -143,6 +151,5 @@
             {% endif %}
         </div>
     </div>
-
 </body>
 </html>
