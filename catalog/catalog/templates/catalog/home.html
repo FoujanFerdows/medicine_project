@@ -95,17 +95,15 @@
         .search-box button:hover {
             background-color: #ffc8dd;
         }
-        .search-results {
-            margin-top: 40px;
-            font-size: 18px;
-            text-align: center;
+        .medicine-list {
+            margin-top: 20px;
         }
-        .search-results ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .search-results li {
+        .medicine-item {
+            background: #f9f9f9;
+            padding: 15px;
             margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -125,28 +123,25 @@
         <div class="hero-title">We understand your needs</div>
         <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
         <div class="search-box">
-            <form action="{% url 'home' %}" method="get">
-                <input type="text" id="search" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
+            <form method="get" action="/">
+                <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
                 <button type="submit">Search</button>
             </form>
         </div>
-    </div>
 
-    <div class="search-results">
-        {% if medicines %}
-            <h2>Search Results</h2>
-            <ul>
+        <div class="medicine-list">
+            {% if medicines %}
+                <h3>Search Results:</h3>
                 {% for medicine in medicines %}
-                    <li>
-                        <a href="{% url 'medicine_detail' pk=medicine.pk %}">
-                            {{ medicine.name }} - ${{ medicine.price }}
-                        </a>
-                    </li>
+                    <div class="medicine-item">
+                        <h4>{{ medicine.name }}</h4>
+                        <p>{{ medicine.description }}</p>
+                    </div>
                 {% endfor %}
-            </ul>
-        {% else %}
-            <p>No medicines found for "{{ search_query }}".</p>
-        {% endif %}
+            {% else %}
+                <p>No medicines found for "{{ search_query }}".</p>
+            {% endif %}
+        </div>
     </div>
 
 </body>
