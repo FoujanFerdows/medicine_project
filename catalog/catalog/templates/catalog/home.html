@@ -142,7 +142,10 @@
                 <h3>Search Results:</h3>
                 {% for medicine in medicines %}
                     <div class="medicine-item">
-                        <h4>{{ medicine.name }}</h4>
+                        <h4>
+                            <!-- Link to Medicine Detail Page -->
+                            <a href="{% url 'medicine_detail' pk=medicine.pk %}">{{ medicine.name }}</a>
+                        </h4>
                         <p>{{ medicine.description }}</p>
                     </div>
                 {% endfor %}
@@ -153,4 +156,3 @@
     </div>
 </body>
 </html>
-
