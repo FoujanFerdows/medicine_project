@@ -1,6 +1,5 @@
 from django.db import models
 
-# Define your choices for the 'availability' field
 AVAILABILITY_CHOICES = [
     ('in_stock', 'In Stock'),
     ('out_of_stock', 'Out of Stock'),
@@ -21,7 +20,7 @@ class Medicine(models.Model):
     usage_instructions = models.TextField()
     side_effects = models.TextField()
 
-    # Update availability to use the choices
+
     availability = models.CharField(max_length=20, choices=AVAILABILITY_CHOICES, default='in_stock')
 
     price = models.DecimalField(max_digits=6, decimal_places=2)
