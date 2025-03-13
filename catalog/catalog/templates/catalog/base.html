@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MediQuick{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <!-- Fixed Taskbar -->
+    <header class="taskbar">
+        <div class="logo-section">
+            <img src="{{ url_for('static', filename='"/Mediquick/logo.png"') }}" alt="MediQuick Logo" class="logo">
+            <h1 class="site-name">MediQuick</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>
