@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% extends 'base.html' %}
+
+    {% block title %}Home - MediQuick{% endblock %}
+    
+    {% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,41 +15,6 @@
             background-color: white;
             margin: 0;
             padding: 0;
-        }
-        .top-bar {
-            background-color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 26px;
-            font-weight: bold;
-            color: #3a0ca3;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        .logo-container img {
-            width: 90px;
-            height: auto;
-            margin-right: 10px;
-        }
-        .nav-links {
-            font-size: 18px;
-        }
-        .nav-links a {
-            margin-top: 10px; 
-            margin-right: 60px;
-            text-decoration: none;
-            color: #3a0ca3;
-            font-weight: bold;
         }
         .hero-section {
             display: flex;
@@ -91,6 +61,7 @@
             color: white;
             padding: 10px 20px;
             border-radius: 50px;
+            margin-left: 90px;
             cursor: pointer;
         }
         .search-box button:hover {
@@ -112,18 +83,7 @@
         }
     </style>
 </head>
-<body>
-    <div class="top-bar">
-        <div class="logo-container">
-            <img src="/Mediquick/logo.png" alt="Mediquick Logo">
-            <span>Mediquick</span>
-        </div>
-        <div class="nav-links">
-            <a href="#">About us</a>
-            <a href="#">Login</a>
-        </div>
-    </div>
-    
+<body>    
     <div class="hero-section">
         <div class="hero-title">We understand your needs</div>
         <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>

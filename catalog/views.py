@@ -23,3 +23,6 @@ def medicine_detail(request, pk):
     
     # Render the 'medicine_detail.html' template with the medicine data
     return render(request, 'catalog/medicine_detail.html', {'medicine': medicine})
+
+def about(request):
+    return render(request, 'about.html')
