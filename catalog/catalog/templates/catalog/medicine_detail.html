@@ -3,17 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ medicine.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+        .medicine-details {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .medicine-details h2 {
+            font-size: 24px;
+            color: #3a0ca3;
+        }
+        .medicine-details p {
+            margin-bottom: 10px;
+        }
+        .medicine-details strong {
+            color: #3a0ca3;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4cc9f0;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #3a8fbd;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ medicine.name }}</h1>
-    <p><strong>Description:</strong> {{ medicine.description }}</p>
-    <p><strong>Active Ingredients:</strong> {{ medicine.active_ingredients }}</p>
-    <p><strong>Usage Instructions:</strong> {{ medicine.usage_instructions }}</p>
-    <p><strong>Side Effects:</strong> {{ medicine.side_effects }}</p>
-    <p><strong>Availability:</strong> {{ medicine.get_availability_display }}</p>
-    <p><strong>Price:</strong> ${{ medicine.price }}</p>
-    <p><strong>Category:</strong> {{ medicine.category.name }}</p>
-    <p><strong>Symptoms:</strong> {{ medicine.symptoms }}</p>
+    <div class="medicine-details">
+        <h1>{{ medicine.name }}</h1>
+
+        <p><strong>Description:</strong> {{ medicine.description }}</p>
+
+        <p><strong>Active Ingredients:</strong> {% if medicine.active_ingredients %}{{ medicine.active_ingredients }}{% else %}Not available{% endif %}</p>
+
+        <p><strong>Usage Instructions:</strong> {% if medicine.usage_instructions %}{{ medicine.usage_instructions }}{% else %}Not available{% endif %}</p>
+
+        <p><strong>Side Effects:</strong> {% if medicine.side_effects %}{{ medicine.side_effects }}{% else %}Not available{% endif %}</p>
+
+        <p><strong>Availability:</strong> {{ medicine.get_availability_display }}</p>
+
+        <p><strong>Price:</strong> ${{ medicine.price }}</p>
+
+        <p><strong>Category:</strong> {{ medicine.category.name }}</p>
+
+        <p><strong>Symptoms:</strong> {% if medicine.symptoms %}{{ medicine.symptoms }}{% else %}Not available{% endif %}</p>
+
+        <!-- Add a back button to go back to the homepage -->
+        <a href="/">Back to Home</a>
+    </div>
 </body>
 </html>
 
