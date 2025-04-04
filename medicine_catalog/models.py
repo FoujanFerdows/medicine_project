@@ -1,9 +1,9 @@
 from django.db import models
 
-# Create your models here.
+# you create your models here, like category model, medicine model, etc. 
 
 
-# Category Model
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -11,7 +11,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-# Medicine Model
+
 class Medicine(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -26,7 +26,7 @@ class Medicine(models.Model):
     def __str__(self):
         return self.name
 
-# Order Model
+
 class Order(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE)
@@ -38,7 +38,6 @@ class Order(models.Model):
     def __str__(self):
         return f"Order #{self.id} by {self.user.username}"
 
-# Prescription Model
 class Prescription(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE)

@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+    {% extends 'base.html' %}
+
+    {% block title %}Home - MediQuick{% endblock %}
+    
+    {% block content %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +19,7 @@
             margin: 0;
             padding: 0;
         }
+
         .top-bar {
             background-color: white;
             padding: 15px 30px;
@@ -46,6 +55,7 @@
             color: #3a0ca3;
             font-weight: bold;
         }
+
         .hero-section {
             display: flex;
             flex-direction: column;
@@ -91,6 +101,10 @@
             color: white;
             padding: 10px 20px;
             border-radius: 50px;
+
+
+            margin-left: 90px;
+
             cursor: pointer;
         }
         .search-box button:hover {
@@ -112,6 +126,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="top-bar">
         <div class="logo-container">
@@ -124,6 +139,9 @@
         </div>
     </div>
     
+
+<body>    
+
     <div class="hero-section">
         <div class="hero-title">We understand your needs</div>
         <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
