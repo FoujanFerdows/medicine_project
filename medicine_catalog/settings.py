@@ -40,7 +40,7 @@ ROOT_URLCONF = 'medicine_catalog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'catalog' / 'templates' / 'catalog'],  # Corrected path
+        'DIRS': [BASE_DIR / 'catalog' / 'catalog' / 'templates' / 'catalog'],  # Correct path to the templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
