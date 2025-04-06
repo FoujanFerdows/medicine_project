@@ -47,6 +47,21 @@
         a:hover {
             background-color: #3a8fbd;
         }
+
+        /* Green button styles */
+        .add-to-list-button {
+            background-color: #28a745;  /* Green background */
+        }
+
+        .add-to-list-button:hover {
+            background-color: #218838;  /* Darker green on hover */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -69,10 +84,11 @@
 
         <p><strong>Symptoms:</strong> {% if medicine.symptoms %}{{ medicine.symptoms }}{% else %}Not available{% endif %}</p>
 
-        <!-- Add a back button to go back to the homepage -->
-        <a href="/">Back to Home</a>
+        <!-- Buttons -->
+        <div class="button-container">
+            <a href="/" class="back-button">Back to Home</a>
+            <a href="{% url 'add_to_shopping_list' medicine.pk %}" class="add-to-list-button">Add to My Shopping List</a>
+        </div>
     </div>
 </body>
 </html>
-
-

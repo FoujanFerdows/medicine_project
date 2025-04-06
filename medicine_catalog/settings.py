@@ -41,7 +41,7 @@ ROOT_URLCONF = 'medicine_catalog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'catalog' / 'catalog' / 'templates' / 'catalog'],  # Correct path to the templates
+        'DIRS': [BASE_DIR / 'catalog' / 'catalog' / 'templates'],  # Correct path to templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -53,7 +53,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'medicine_catalog.wsgi.application'
 

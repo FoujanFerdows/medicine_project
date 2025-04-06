@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}MediQuick{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    {% load static %}  <!-- Load the static template tag -->
+
+    <!-- Correct usage of static files -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
 
     <!-- Fixed Taskbar -->
     <header class="taskbar">
         <div class="logo-section">
-            <img src="{{ url_for('static', filename='"images/logo.png"') }}" alt="MediQuick Logo" class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo" class="logo">
             <h1 class="site-name">MediQuick</h1>
         </div>
         <nav>
@@ -20,16 +24,37 @@
                 <li><a href="#">Login</a></li>
             </ul>
         </nav>
-        <nav>
-            <ul>
-                <li><a href="{% url 'about' %}">About Us</a></li>
-            </ul>
-        </nav>
     </header>
+
+    <!-- Spacer to prevent content from being hidden under the fixed header -->
+    <div class="header-spacer"></div> <!-- Add this spacer -->
 
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <!-- JavaScript to Hide Header on Scroll -->
+    <script>
+        // Get the taskbar
+        const taskbar = document.querySelector('.taskbar');
+
+        // Keep track of the last scroll position
+        let lastScrollTop = 0;
+
+        window.addEventListener('scroll', function () {
+            // Get current scroll position
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            // If we're scrolling down, hide the taskbar, else show it
+            if (currentScroll > lastScrollTop) {
+                taskbar.style.top = "-80px"; // Hide taskbar
+            } else {
+                taskbar.style.top = "0"; // Show taskbar
+            }
+            // Update the last scroll position
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+    </script>
 
 </body>
 </html>
