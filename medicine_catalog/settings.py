@@ -104,8 +104,9 @@ STATIC_URL = 'static/'
 
 # Add this line to specify the static files directory where your app's static files are located
 STATICFILES_DIRS = [
-    BASE_DIR / 'catalog' / 'static',  # This path points to the 'static' folder inside your catalog app
+    BASE_DIR / 'catalog' / 'catalog' / 'static',  # This includes your 'catalog/catalog/static' directory
 ]
+
 
 
 # Use this setting for when your static files need to be collected (e.g., in production)
