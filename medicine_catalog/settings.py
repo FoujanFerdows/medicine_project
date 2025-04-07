@@ -102,10 +102,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Add this line to specify the static files directory where your app's static files are located
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Define the path where your static files are located
+    BASE_DIR / "catalog" / "catalog" / "static",  # Path where the static files are in your catalog app
 ]
 
+# Use this setting for when your static files need to be collected (e.g., in production)
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Optional, only needed in production
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
