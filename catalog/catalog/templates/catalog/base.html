@@ -20,14 +20,15 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Spacer to prevent content from being hidden under the fixed header -->
-    <div class="header-spacer"></div> <!-- Add this spacer -->
+    <div class="header-spacer"></div>
 
     <main>
         {% block content %}{% endblock %}
@@ -35,23 +36,17 @@
 
     <!-- JavaScript to Hide Header on Scroll -->
     <script>
-        // Get the taskbar
         const taskbar = document.querySelector('.taskbar');
-
-        // Keep track of the last scroll position
         let lastScrollTop = 0;
 
         window.addEventListener('scroll', function () {
-            // Get current scroll position
             let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-            // If we're scrolling down, hide the taskbar, else show it
             if (currentScroll > lastScrollTop) {
-                taskbar.style.top = "-80px"; // Hide taskbar
+                taskbar.style.top = "-80px";
             } else {
-                taskbar.style.top = "0"; // Show taskbar
+                taskbar.style.top = "0";
             }
-            // Update the last scroll position
             lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
         });
     </script>
