@@ -120,6 +120,22 @@
             background-color: #ffc8dd;
         }
 
+        .alphabet-filter {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .alphabet-filter a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #3a0ca3;
+            font-weight: bold;
+        }
+
+        .alphabet-filter a:hover {
+            color: #ffc8dd;
+        }
+
         .medicine-list {
             margin-top: 20px;
             display: flex;
@@ -160,6 +176,13 @@
                 <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
                 <button type="submit">Search</button>
             </form>
+        </div>
+
+        <!-- Alphabet Filter -->
+        <div class="alphabet-filter">
+            {% for letter in alphabet %}
+                <a href="?letter={{ letter }}&q={{ search_query }}">{{ letter }}</a>
+            {% endfor %}
         </div>
         
         <!-- Medicine Search Results -->
