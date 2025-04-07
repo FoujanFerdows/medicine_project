@@ -3,15 +3,29 @@ from .models import Medicine, ShoppingList  # Import ShoppingList model
 
 # Home view to display all medicines or search results
 def home(request):
+    # Fetch all medicines by default
     medicines = Medicine.objects.all()
-    search_query = request.GET.get('q', '')  # Get the search query from the URL
 
+    # Get the search query and letter from the URL
+    search_query = request.GET.get('q', '')
+    letter = request.GET.get('letter', '')  # New 'letter' parameter to filter by letter
+
+    # Filter by search query if available
     if search_query:
         medicines = medicines.filter(name__icontains=search_query)
 
+    # Filter by letter if selected
+    if letter:
+        medicines = medicines.filter(name__istartswith=letter)
+
+    # Get the list of unique first letters for the alphabetical filter
+    alphabet = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
+
     return render(request, 'catalog/home.html', {
         'medicines': medicines,
-        'search_query': search_query
+        'search_query': search_query,
+        'alphabet': alphabet,  # Pass the alphabet list to the template
+        'letter': letter,      # Pass the selected letter for active highlighting
     })
 
 # Medicine detail view to display individual medicine information
