@@ -53,4 +53,18 @@ def contact(request):
 
 # Login view (you can later add authentication logic here)
 def login_view(request):
-    return render(request, 'catalog/login.html')  # Render the login template
+    return render(request, 'catalog/login.html') 
+    
+from django.contrib.auth.forms import UserCreationForm  # Add this import at the top with the others
+
+# Signup view
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirect to login page after successful signup
+    else:
+        form = UserCreationForm()
+    return render(request, 'catalog/signup.html', {'form': form})
+# Render the login template
