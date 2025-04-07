@@ -215,20 +215,21 @@
         window.addEventListener('scroll', function () {
             let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-            // Check scroll direction (up or down)
-            if (currentScroll > lastScrollTop) {
+            // If the page is scrolled more than 80px down, hide the top bar when scrolling down
+            if (currentScroll > lastScrollTop && currentScroll > 80) {
                 // Scrolling down - hide the top bar
                 topBar.style.top = "-80px"; // Adjust this to the height of your top bar
-            } else {
+            } else if (currentScroll < lastScrollTop) {
                 // Scrolling up - show the top bar
                 topBar.style.top = "0";
             }
 
             // Update lastScrollTop with the current scroll position
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Ensure scroll position doesn't go negative
         });
     });
 </script>
+
 
 </body>
 
