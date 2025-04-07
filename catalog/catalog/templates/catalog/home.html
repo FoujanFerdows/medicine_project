@@ -5,12 +5,44 @@
 {% block content %}
 {% load static %}
 
+<div class="hero-section">
+    <div class="hero-title">We understand your needs</div>
+    <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
+
+    <!-- Search Form -->
+    <div class="search-box">
+        <form method="get" action="/">
+            <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    
+    <!-- Medicine Search Results -->
+    <div class="medicine-list">
+        {% if medicines %}
+            <h3>Search Results:</h3>
+            {% for medicine in medicines %}
+                <div class="medicine-item">
+                    <h4>
+                        <!-- Link to Medicine Detail Page -->
+                        <a href="{% url 'medicine_detail' pk=medicine.pk %}">{{ medicine.name }}</a>
+                    </h4>
+                    <p>{{ medicine.description }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No medicines found for "{{ search_query }}".</p>
+        {% endif %}
+    </div>
+</div>
+
 <style>
     body {
         font-family: Arial, sans-serif;
         background-color: white;
         margin: 0;
         padding: 0;
+        padding-top: 80px;
     }
 
     .hero-section {
@@ -21,7 +53,7 @@
         height: 80vh;
         text-align: center;
         padding: 20px;
-        margin-top: 50px;
+        margin-top: 100px;
     }
 
     .hero-title {
@@ -88,34 +120,21 @@
     }
 </style>
 
-<div class="hero-section">
-    <div class="hero-title">We understand your needs</div>
-    <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
+<script>
+    let lastScrollTop = 0;
+    const topBar = document.querySelector('.top-bar');
 
-    <!-- Search Form -->
-    <div class="search-box">
-        <form method="get" action="/">
-            <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
-            <button type="submit">Search</button>
-        </form>
-    </div>
-    
-    <!-- Medicine Search Results -->
-    <div class="medicine-list">
-        {% if medicines %}
-            <h3>Search Results:</h3>
-            {% for medicine in medicines %}
-                <div class="medicine-item">
-                    <h4>
-                        <a href="{% url 'medicine_detail' pk=medicine.pk %}">{{ medicine.name }}</a>
-                    </h4>
-                    <p>{{ medicine.description }}</p>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No medicines found for "{{ search_query }}".</p>
-        {% endif %}
-    </div>
-</div>
+    document.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('scroll', function () {
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScroll > lastScrollTop) {
+                topBar.style.top = "-80px";
+            } else {
+                topBar.style.top = "0";
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+    });
+</script>
 
 {% endblock %}
