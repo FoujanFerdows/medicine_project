@@ -208,27 +208,29 @@
 {% endblock %}
 
 <script>
-    let lastScrollTop = 0;  // Variable to track the last scroll position
-    const topBar = document.querySelector('.top-bar');  // The bar to hide/show
+    let lastScrollTop = 0; // Variable to track the last scroll position
+    const topBar = document.querySelector('.top-bar'); // The top bar element
 
     // Ensure the script runs after the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         window.addEventListener('scroll', function () {
-            let currentScroll = window.scrollY;  // Get the current scroll position
-            console.log("Current Scroll Position: " + currentScroll);  // Debugging line
+            let currentScroll = window.scrollY || document.documentElement.scrollTop; // Get current scroll position
 
             // Hide the top bar when scrolling down and show when scrolling up
             if (currentScroll > lastScrollTop && currentScroll > topBar.offsetHeight) {
-                topBar.style.top = `-${topBar.offsetHeight}px`; // Hide the bar when scrolling down
+                // Scrolling down - hide the top bar
+                topBar.style.top = `-${topBar.offsetHeight}px`;
             } else {
-                topBar.style.top = "0";  // Show the bar when scrolling up
+                // Scrolling up - show the top bar
+                topBar.style.top = "0";
             }
 
             // Update lastScrollTop with the current scroll position
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Ensure it doesn't go negative
         });
     });
 </script>
+
 
 
 </body>
