@@ -6,7 +6,7 @@
 {% block title %}Home - MediQuick{% endblock %}
 
 {% block content %}
-{% load static %}  <!-- Ensure this is added to load static files -->
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
@@ -18,7 +18,7 @@
             background-color: white;
             margin: 0;
             padding: 0;
-            padding-top: 80px;  /* Ensure there's space for the fixed top bar */
+            padding-top: 80px; /* Ensure there's space for the fixed top bar */
         }
 
         .top-bar {
@@ -36,7 +36,7 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            transition: top 0.3s ease;  /* Smooth transition for hide/show */
+            transition: top 0.3s ease; /* Smooth transition for hide/show */
         }
 
         .logo-container {
@@ -70,7 +70,7 @@
             height: 80vh;
             text-align: center;
             padding: 20px;
-            margin-top: 100px;  /* Make sure the hero section is below the fixed top bar */
+            margin-top: 100px; /* Make sure the hero section is below the fixed top bar */
         }
 
         .hero-title {
@@ -120,22 +120,6 @@
             background-color: #ffc8dd;
         }
 
-        .alphabet-filter {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .alphabet-filter a {
-            margin: 0 5px;
-            text-decoration: none;
-            color: #3a0ca3;
-            font-weight: bold;
-        }
-
-        .alphabet-filter a:hover {
-            color: #ffc8dd;
-        }
-
         .medicine-list {
             margin-top: 20px;
             display: flex;
@@ -162,8 +146,7 @@
         </div>
         <div class="nav-links">
             <a href="{% url 'about' %}">About us</a>
-          <a href="{% url 'login' %}">Login</a>
-
+            <a href="{% url 'login' %}">Login</a>
         </div>
     </div>
 
@@ -179,13 +162,6 @@
             </form>
         </div>
 
-        <!-- Alphabet Filter -->
-        <div class="alphabet-filter">
-            {% for letter in alphabet %}
-                <a href="?letter={{ letter }}&q={{ search_query }}">{{ letter }}</a>
-            {% endfor %}
-        </div>
-        
         <!-- Medicine Search Results -->
         <div class="medicine-list">
             {% if medicines %}
@@ -205,11 +181,14 @@
         </div>
     </div>
 
+    <!-- Dummy Content to Ensure Page Length -->
+    <div style="height: 2000px;"></div>
+
 {% endblock %}
 
 <script>
-    let lastScrollTop = 0; // Variable to track the last scroll position
-    const topBar = document.querySelector('.top-bar'); // The top bar element
+    let lastScrollTop = 0;  // Variable to track the last scroll position
+    const topBar = document.querySelector('.top-bar');  // The top bar element
 
     // Ensure the script runs after the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', function () {
@@ -231,8 +210,5 @@
     });
 </script>
 
-
-
 </body>
-
 </html>
