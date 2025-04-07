@@ -13,7 +13,7 @@
         }
         .signup-container {
             background-color: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             max-width: 400px;
@@ -22,47 +22,41 @@
         h1 {
             color: #333;
             text-align: center;
-            margin-bottom: 20px;
         }
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin: 10px 0 5px;
         }
         input[type="text"], input[type="email"], input[type="password"] {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box;
+        }
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+        .toggle-eye {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
         }
         .signup-button {
             background-color: #4cc9f0;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 20px;
             text-align: center;
             border-radius: 5px;
             display: block;
             width: 100%;
             text-decoration: none;
-            font-size: 16px;
-            box-sizing: border-box;
         }
         .signup-button:hover {
             background-color: #3a8fbd;
-        }
-        .login-prompt {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-        .login-prompt a {
-            color: #4cc9f0;
-            text-decoration: none;
-        }
-        .login-prompt a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -80,18 +74,35 @@
             <input type="email" id="email" name="email" required>
 
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+            <div class="password-container">
+                <input type="password" id="password" name="password" required>
+                <img src="{% static 'images/eye-icon.png' %}" alt="Show password" class="toggle-eye" id="eye-icon-password" onclick="togglePassword('password')">
+            </div>
 
             <label for="confirm_password">Confirm Password</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
+            <div class="password-container">
+                <input type="password" id="confirm_password" name="confirm_password" required>
+                <img src="{% static 'images/eye-icon.png' %}" alt="Show password" class="toggle-eye" id="eye-icon-confirm-password" onclick="togglePassword('confirm_password')">
+            </div>
 
             <button type="submit" class="signup-button">Sign Up</button>
         </form>
-
-        <div class="login-prompt">
-            <p>Already have an account? <a href="/login">Log in here</a></p>
-        </div>
     </div>
+
+    <script>
+        function togglePassword(id) {
+            const passwordField = document.getElementById(id);
+            const eyeIcon = document.getElementById('eye-icon-' + id);
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.src = "{% static 'images/eye-slash-icon.png' %}";  // Update with your "eye-slash" image
+            } else {
+                passwordField.type = "password";
+                eyeIcon.src = "{% static 'images/eye-icon.png' %}";  // Update with your "eye" image
+            }
+        }
+    </script>
 
 </body>
 </html>
