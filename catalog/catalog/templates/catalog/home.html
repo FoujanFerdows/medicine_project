@@ -1,212 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-
 {% extends 'catalog/base.html' %}
 
 {% block title %}Home - MediQuick{% endblock %}
 
 {% block content %}
-{% load static %}  <!-- Ensure this is added to load static files -->
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mediquick - Medicine Search</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            margin: 0;
-            padding: 0;
-            padding-top: 80px;  /* Ensure there's space for the fixed top bar */
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        margin: 0;
+        padding: 0;
+    }
 
-        .top-bar {
-            background-color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 26px;
-            font-weight: bold;
-            color: #3a0ca3;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: top 0.3s ease;  /* Smooth transition for hide/show */
-        }
+    .hero-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+        text-align: center;
+        padding: 20px;
+        margin-top: 50px;
+    }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
+    .hero-title {
+        font-size: 36px;
+        font-weight: bold;
+        color: #333;
+    }
 
-        .logo-container img {
-            width: 90px;
-            height: auto;
-            margin-right: 10px;
-        }
+    .hero-description {
+        font-size: 18px;
+        color: #666;
+        margin-top: 10px;
+        max-width: 600px;
+    }
 
-        .nav-links {
-            font-size: 18px;
-        }
+    .search-box {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 10px;
+        border-radius: 50px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+    }
 
-        .nav-links a {
-            margin-top: 10px;
-            margin-right: 60px;
-            text-decoration: none;
-            color: #3a0ca3;
-            font-weight: bold;
-        }
+    .search-box input {
+        border: none;
+        outline: none;
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 50px;
+    }
 
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 80vh;
-            text-align: center;
-            padding: 20px;
-            margin-top: 100px;  /* Make sure the hero section is below the fixed top bar */
-        }
+    .search-box button {
+        background-color: #4cc9f0;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 50px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
 
-        .hero-title {
-            font-size: 36px;
-            font-weight: bold;
-            color: #333;
-        }
+    .search-box button:hover {
+        background-color: #ffc8dd;
+    }
 
-        .hero-description {
-            font-size: 18px;
-            color: #666;
-            margin-top: 10px;
-            max-width: 600px;
-        }
+    .medicine-list {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        .search-box {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 10px;
-            border-radius: 50px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
+    .medicine-item {
+        background: #f9f9f9;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 80%;
+    }
+</style>
 
-        .search-box input {
-            border: none;
-            outline: none;
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 50px;
-        }
+<div class="hero-section">
+    <div class="hero-title">We understand your needs</div>
+    <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
 
-        .search-box button {
-            background-color: #4cc9f0;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
-
-        .search-box button:hover {
-            background-color: #ffc8dd;
-        }
-
-        .medicine-list {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .medicine-item {
-            background: #f9f9f9;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 80%;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="top-bar">
-        <div class="logo-container">
-            <img src="{% static 'images/logo.png' %}" alt="Mediquick Logo">
-            <span>Mediquick</span>
-        </div>
-        <div class="nav-links">
-            <a href="{% url 'about' %}">About us</a>
-            <a href="#">Login</a>
-        </div>
+    <!-- Search Form -->
+    <div class="search-box">
+        <form method="get" action="/">
+            <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
+            <button type="submit">Search</button>
+        </form>
     </div>
-
-    <div class="hero-section">
-        <div class="hero-title">We understand your needs</div>
-        <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
-
-        <!-- Search Form -->
-        <div class="search-box">
-            <form method="get" action="/">
-                <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-        
-        <!-- Medicine Search Results -->
-        <div class="medicine-list">
-            {% if medicines %}
-                <h3>Search Results:</h3>
-                {% for medicine in medicines %}
-                    <div class="medicine-item">
-                        <h4>
-                            <!-- Link to Medicine Detail Page -->
-                            <a href="{% url 'medicine_detail' pk=medicine.pk %}">{{ medicine.name }}</a>
-                        </h4>
-                        <p>{{ medicine.description }}</p>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>No medicines found for "{{ search_query }}".</p>
-            {% endif %}
-        </div>
+    
+    <!-- Medicine Search Results -->
+    <div class="medicine-list">
+        {% if medicines %}
+            <h3>Search Results:</h3>
+            {% for medicine in medicines %}
+                <div class="medicine-item">
+                    <h4>
+                        <a href="{% url 'medicine_detail' pk=medicine.pk %}">{{ medicine.name }}</a>
+                    </h4>
+                    <p>{{ medicine.description }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No medicines found for "{{ search_query }}".</p>
+        {% endif %}
     </div>
+</div>
 
 {% endblock %}
-
-<script>
-    let lastScrollTop = 0; // Variable to track last scroll position
-    const topBar = document.querySelector('.top-bar'); // The bar to hide/show
-
-    // Make sure the script only runs after the DOM is ready
-    document.addEventListener('DOMContentLoaded', function() {
-        window.addEventListener('scroll', function () {
-            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-            // Check scroll direction (up or down)
-            if (currentScroll > lastScrollTop) {
-                // Scrolling down - hide the top bar
-                topBar.style.top = "-80px"; // Adjust this to the height of your top bar
-            } else {
-                // Scrolling up - show the top bar
-                topBar.style.top = "0";
-            }
-
-            // Update lastScrollTop with the current scroll position
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-        });
-    });
-</script>
-
-</body>
-
-</html>
