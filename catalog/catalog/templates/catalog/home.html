@@ -18,7 +18,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 80vh;
+        min-height: 100vh;
         text-align: center;
         padding: 20px;
     }
@@ -70,6 +70,23 @@
         background-color: #ffc8dd;
     }
 
+    .search-toggle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .search-toggle label {
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .search-toggle input[type="radio"] {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
     .medicine-list {
         margin-top: 20px;
         display: flex;
@@ -86,68 +103,27 @@
         width: 80%;
     }
 
-    /* Toggle Styles */
-    .toggle-container {
+    .alphabet-filter {
         margin-top: 30px;
         display: flex;
-        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
     }
 
-    .toggle-container label {
-        font-size: 18px;
-        margin-right: 10px;
-    }
-
-    .toggle-switch {
-        position: relative;
-        width: 60px;
-        height: 30px;
-    }
-
-    .toggle-switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-        position: absolute;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        transition: 0.4s;
-        border-radius: 50px;
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 22px;
-        width: 22px;
-        border-radius: 50px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        transition: 0.4s;
-    }
-
-    input:checked + .slider {
-        background-color: #4cc9f0;
-    }
-
-    input:checked + .slider:before {
-        transform: translateX(30px);
-    }
-
-    /* Labels for search toggle */
-    .toggle-label {
-        font-size: 16px;
-        color: #4cc9f0;
+    .alphabet-filter a {
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        background-color: #f1f1f1;
+        color: #3a0ca3;
         font-weight: bold;
+        font-size: 16px;
+    }
+
+    .alphabet-filter a.active {
+        background-color: #3a0ca3;
+        color: white;
     }
 </style>
 {% endblock %}
@@ -155,37 +131,35 @@
 {% block content %}
 <div class="hero-section">
     <div class="hero-title">We understand your needs</div>
-    <p class="hero-description">Mediquick enables you to quickly access information about your medicines or symptoms</p>
-
-    <!-- Search Mode Toggle -->
-    <div class="toggle-container">
-        <label for="search-toggle" class="toggle-label">Search by Medicine</label>
-        <label class="switch">
-            <input type="checkbox" id="search-toggle" name="search-toggle" onchange="toggleSearchMode()">
-            <span class="slider"></span>
-        </label>
-        <label for="search-toggle" class="toggle-label">Search by Symptoms</label>
-    </div>
+    <p class="hero-description">Mediquick enables you to quickly access information about your medicines and symptoms</p>
 
     <!-- Search Box -->
     <div class="search-box">
         <form method="get" action="/">
-            <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
-            <input type="hidden" name="search_type" id="search-type" value="medicine">
+            <input type="text" name="q" placeholder="Search..." value="{{ search_query }}">
             <button type="submit">Search</button>
         </form>
     </div>
 
-    <!-- Alphabet List -->
-    <div class="alphabet-container">
-        {% for letter in alphabet %}
-            <a href="?letter={{ letter }}" 
-               class="letter {% if letter == letter %}active{% endif %}">
-                {{ letter }}
+    <!-- Search toggle for selecting search type (Medicine or Symptom) -->
+    <div class="search-toggle">
+        <label for="search-medicine">Search by Medicine</label>
+        <input type="radio" name="search_type" id="search-medicine" value="medicine" {% if search_type == 'medicine' %}checked{% endif %}>
+
+        <label for="search-symptom">Search by Symptom</label>
+        <input type="radio" name="search_type" id="search-symptom" value="symptom" {% if search_type == 'symptom' %}checked{% endif %}>
+    </div>
+
+    <!-- Alphabet filter positioned below the search box -->
+    <div class="alphabet-filter">
+        {% for char in alphabet %}
+            <a href="?letter={{ char }}" class="{% if letter == char %}active{% endif %}">
+                {{ char }}
             </a>
         {% endfor %}
     </div>
-    
+
+    <!-- Medicines List -->
     <div class="medicine-list">
         {% if medicines %}
             <h3>Search Results:</h3>
@@ -197,39 +171,9 @@
                     <p>{{ medicine.description }}</p>
                 </div>
             {% endfor %}
-        {% elif symptoms %}
-            <h3>Symptom Results:</h3>
-            {% for symptom in symptoms %}
-                <div class="medicine-item">
-                    <h4>{{ symptom.name }}</h4>
-                    <p>{{ symptom.description }}</p>
-                </div>
-            {% endfor %}
         {% else %}
             <p>No results found for "{{ search_query }}".</p>
         {% endif %}
     </div>
 </div>
-
-<!-- Extra space to enable scroll behavior -->
-<div style="height: 2000px;"></div>
-
-{% endblock %}
-
-{% block extra_scripts %}
-<script>
-    function toggleSearchMode() {
-        let searchToggle = document.getElementById("search-toggle");
-        let searchInput = document.querySelector("input[name='q']");
-        let searchTypeInput = document.getElementById("search-type");
-
-        if (searchToggle.checked) {
-            searchInput.placeholder = "Search by Symptoms...";
-            searchTypeInput.value = "symptom";  // Switch to search symptoms
-        } else {
-            searchInput.placeholder = "Search for Medicines...";
-            searchTypeInput.value = "medicine";  // Switch to search medicines
-        }
-    }
-</script>
 {% endblock %}
