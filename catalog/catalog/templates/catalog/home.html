@@ -18,7 +18,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 100vh; /* Updated for better scroll behavior */
+        min-height: 100vh;
         text-align: center;
         padding: 20px;
     }
@@ -70,6 +70,23 @@
         background-color: #ffc8dd;
     }
 
+    .search-toggle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .search-toggle label {
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .search-toggle input[type="radio"] {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
     .medicine-list {
         margin-top: 20px;
         display: flex;
@@ -86,9 +103,8 @@
         width: 80%;
     }
 
-    /* Alphabet filter styling */
     .alphabet-filter {
-        margin-top: 30px; /* Space from the search box */
+        margin-top: 30px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -115,14 +131,23 @@
 {% block content %}
 <div class="hero-section">
     <div class="hero-title">We understand your needs</div>
-    <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
+    <p class="hero-description">Mediquick enables you to quickly access information about your medicines and symptoms</p>
 
     <!-- Search Box -->
     <div class="search-box">
         <form method="get" action="/">
-            <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
+            <input type="text" name="q" placeholder="Search..." value="{{ search_query }}">
             <button type="submit">Search</button>
         </form>
+    </div>
+
+    <!-- Search toggle for selecting search type (Medicine or Symptom) -->
+    <div class="search-toggle">
+        <label for="search-medicine">Search by Medicine</label>
+        <input type="radio" name="search_type" id="search-medicine" value="medicine" {% if search_type == 'medicine' %}checked{% endif %}>
+
+        <label for="search-symptom">Search by Symptom</label>
+        <input type="radio" name="search_type" id="search-symptom" value="symptom" {% if search_type == 'symptom' %}checked{% endif %}>
     </div>
 
     <!-- Alphabet filter positioned below the search box -->
@@ -147,9 +172,8 @@
                 </div>
             {% endfor %}
         {% else %}
-            <p>No medicines found for "{{ search_query }}".</p>
+            <p>No results found for "{{ search_query }}".</p>
         {% endif %}
     </div>
 </div>
 {% endblock %}
-
