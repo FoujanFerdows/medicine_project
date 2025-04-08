@@ -31,10 +31,23 @@ class Medicine(models.Model):
         return self.name
 
 
+# New Symptom model for symptom-based search
+class Symptom(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
 # New ShoppingList model
 class ShoppingList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     medicines = models.ManyToManyField(Medicine)
+
+    def __str__(self):
+        return f"Shopping List for {self.user.username}"
+
 
     def __str__(self):
         return f"Shopping List for {self.user.username}"
