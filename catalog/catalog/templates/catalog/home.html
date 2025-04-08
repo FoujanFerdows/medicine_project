@@ -177,11 +177,14 @@
     </div>
 
     <!-- Alphabet List -->
-    <div class="alphabet-container">
-        {% for letter in alphabet %}
-            <a href="?letter={{ letter }}" class="letter {{ 'active' if letter == selected_letter else '' }}">{{ letter }}</a>
-        {% endfor %}
-    </div>
+<div class="alphabet-container">
+    {% for letter in alphabet %}
+        <a href="?letter={{ letter }}" 
+           class="letter {% if letter == letter %}active{% endif %}">
+            {{ letter }}
+        </a>
+    {% endfor %}
+</div>
 
     <div class="medicine-list">
         {% if medicines %}
