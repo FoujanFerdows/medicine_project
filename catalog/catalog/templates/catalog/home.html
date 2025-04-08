@@ -13,47 +13,6 @@
         padding-top: 80px;
     }
 
-    .top-bar {
-        background-color: white;
-        padding: 15px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 26px;
-        font-weight: bold;
-        color: #3a0ca3;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        transition: top 0.3s ease;
-    }
-
-    .logo-container {
-        display: flex;
-        align-items: center;
-    }
-
-    .logo-container img {
-        width: 90px;
-        height: auto;
-        margin-right: 10px;
-    }
-
-    .nav-links {
-        font-size: 18px;
-    }
-
-    .nav-links a {
-        margin-top: 10px;
-        margin-right: 60px;
-        text-decoration: none;
-        color: #3a0ca3;
-        font-weight: bold;
-    }
-
     .hero-section {
         display: flex;
         flex-direction: column;
@@ -62,7 +21,6 @@
         height: 80vh;
         text-align: center;
         padding: 20px;
-        margin-top: 100px;
     }
 
     .hero-title {
@@ -131,17 +89,6 @@
 {% endblock %}
 
 {% block content %}
-<div class="top-bar">
-    <div class="logo-container">
-        <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo">
-        <span>MediQuick</span>
-    </div>
-    <div class="nav-links">
-        <a href="{% url 'about' %}">About us</a>
-        <a href="{% url 'login' %}">Login</a>
-    </div>
-</div>
-
 <div class="hero-section">
     <div class="hero-title">We understand your needs</div>
     <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
@@ -174,23 +121,3 @@
 <div style="height: 2000px;"></div>
 {% endblock %}
 
-{% block extra_scripts %}
-<script>
-    let lastScrollTop = 0;
-    const topBar = document.querySelector('.top-bar');
-
-    document.addEventListener('DOMContentLoaded', function () {
-        window.addEventListener('scroll', function () {
-            let currentScroll = window.scrollY || document.documentElement.scrollTop;
-
-            if (currentScroll > lastScrollTop && currentScroll > topBar.offsetHeight) {
-                topBar.style.top = `-${topBar.offsetHeight}px`;
-            } else {
-                topBar.style.top = "0";
-            }
-
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-        });
-    });
-</script>
-{% endblock %}
