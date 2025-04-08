@@ -1,20 +1,25 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Medicine, ShoppingList  # Import ShoppingList model
+from .models import Medicine, Symptom, ShoppingList  # Import Symptom model for symptom search
 
 # Home view to display all medicines or search results
 def home(request):
     # Fetch all medicines by default
     medicines = Medicine.objects.all()
+    symptoms = Symptom.objects.all()  # Fetch all symptoms by default
 
-    # Get the search query and letter from the URL
+    # Get the search query, letter, and search type from the URL
     search_query = request.GET.get('q', '')
     letter = request.GET.get('letter', '')  # New 'letter' parameter to filter by letter
+    search_type = request.GET.get('search_type', 'medicine')  # Default to medicine search
 
     # Filter by search query if available
     if search_query:
-        medicines = medicines.filter(name__icontains=search_query)
+        if search_type == 'medicine':
+            medicines = medicines.filter(name__icontains=search_query)
+        elif search_type == 'symptom':
+            symptoms = symptoms.filter(name__icontains=search_query)
 
-    # Filter by letter if selected
+    # Filter by letter if selected (only for medicine)
     if letter:
         medicines = medicines.filter(name__istartswith=letter)
 
@@ -23,9 +28,11 @@ def home(request):
 
     return render(request, 'catalog/home.html', {
         'medicines': medicines,
+        'symptoms': symptoms,
         'search_query': search_query,
         'alphabet': alphabet,  # Pass the alphabet list to the template
         'letter': letter,      # Pass the selected letter for active highlighting
+        'search_type': search_type,  # Pass the search type (medicine or symptom)
     })
 
 # Medicine detail view to display individual medicine information
@@ -67,8 +74,8 @@ def contact(request):
 
 # Login view (you can later add authentication logic here)
 def login_view(request):
-    return render(request, 'catalog/login.html') 
-    
+    return render(request, 'catalog/login.html')
+
 from django.contrib.auth.forms import UserCreationForm  # Add this import at the top with the others
 
 # Signup view
@@ -81,4 +88,4 @@ def signup_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'catalog/signup.html', {'form': form})
-# Render the login template
+
