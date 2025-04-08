@@ -54,10 +54,6 @@
             color: #3a0ca3;
             font-weight: bold;
         }
-
-        .header-spacer {
-            height: 80px;
-        }
     </style>
 
     {% block extra_styles %}{% endblock %}
@@ -76,12 +72,8 @@
         </div>
     </header>
 
-   <main style="padding-top: 90px;">
-    {% block content %}{% endblock %}
-</main>
-
-
-    <main>
+    <!-- Add space below the fixed header -->
+    <main style="padding-top: 90px;">
         {% block content %}{% endblock %}
     </main>
 
