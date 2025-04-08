@@ -88,7 +88,7 @@
 
     /* Alphabet filter styling */
     .alphabet-filter {
-        margin-top: 30px;
+        margin-top: 30px; /* Space from the search box */
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -117,21 +117,21 @@
     <div class="hero-title">We understand your needs</div>
     <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
 
-    <!-- Alphabet filter -->
-    <div class="alphabet-filter">
-        {% for char in alphabet %}
-            <a href="?letter={{ char }}" class="{% if letter == char %}active{% endif %}">
-                {{ char }}
-            </a>
-        {% endfor %}
-    </div>
-
     <!-- Search Box -->
     <div class="search-box">
         <form method="get" action="/">
             <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
             <button type="submit">Search</button>
         </form>
+    </div>
+
+    <!-- Alphabet filter positioned below the search box -->
+    <div class="alphabet-filter">
+        {% for char in alphabet %}
+            <a href="?letter={{ char }}" class="{% if letter == char %}active{% endif %}">
+                {{ char }}
+            </a>
+        {% endfor %}
     </div>
 
     <!-- Medicines List -->
@@ -152,3 +152,4 @@
     </div>
 </div>
 {% endblock %}
+
