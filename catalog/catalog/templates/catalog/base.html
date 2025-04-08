@@ -76,7 +76,10 @@
         </div>
     </header>
 
-    <div class="header-spacer"></div>
+   <main style="padding-top: 90px;">
+    {% block content %}{% endblock %}
+</main>
+
 
     <main>
         {% block content %}{% endblock %}
