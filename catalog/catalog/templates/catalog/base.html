@@ -6,19 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}MediQuick{% endblock %}</title>
 
-    {% load static %}  <!-- Load the static template tag -->
-
-    <!-- Correct usage of static files -->
+    {% load static %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
-    
-    <!-- Additional styles to make the top bar sticky -->
+
+    <!-- Default styles for header -->
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
         }
 
-        /* Style the fixed header */
         .taskbar {
             position: fixed;
             top: 0;
@@ -43,6 +40,7 @@
         .logo-section h1 {
             font-size: 20px;
             color: #3a0ca3;
+            margin-left: 10px;
         }
 
         .taskbar nav ul {
@@ -63,17 +61,19 @@
         }
 
         .header-spacer {
-            height: 80px;  /* Adjust based on the height of your fixed header */
+            height: 80px;
         }
     </style>
+
+    {% block extra_styles %}{% endblock %}
 </head>
 
 <body>
 
     <!-- Fixed Taskbar -->
     <header class="taskbar">
-        <div class="logo-section">
-            <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo" class="logo">
+        <div class="logo-section" style="display: flex; align-items: center;">
+            <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo">
             <h1 class="site-name">MediQuick</h1>
         </div>
         <nav>
@@ -84,37 +84,32 @@
             </ul>
         </nav>
     </header>
--->
-    <!-- Spacer to prevent content from being hidden under the fixed header -->
+
+    <!-- Prevent content from being hidden behind the taskbar -->
     <div class="header-spacer"></div>
 
     <main>
         {% block content %}{% endblock %}
     </main>
 
-    <!-- JavaScript to Hide Header on Scroll -->
+    <!-- Default scroll script -->
     <script>
-        // Get the taskbar
         const taskbar = document.querySelector('.taskbar');
-
-        // Keep track of the last scroll position
         let lastScrollTop = 0;
 
         window.addEventListener('scroll', function () {
-            // Get current scroll position
             let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-            // If we're scrolling down, hide the taskbar, else show it
             if (currentScroll > lastScrollTop) {
-                taskbar.style.top = "-80px"; // Hide taskbar
+                taskbar.style.top = "-80px";
             } else {
-                taskbar.style.top = "0"; // Show taskbar
+                taskbar.style.top = "0";
             }
-            // Update the last scroll position
             lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
         });
     </script>
 
-</body>
+    {% block extra_scripts %}{% endblock %}
 
+</body>
 </html>
