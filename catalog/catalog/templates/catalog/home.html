@@ -18,7 +18,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 80vh;
+        min-height: 100vh; /* Updated for better scroll behavior */
         text-align: center;
         padding: 20px;
     }
@@ -85,6 +85,30 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         width: 80%;
     }
+
+    /* Alphabet filter styling */
+    .alphabet-filter {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .alphabet-filter a {
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        background-color: #f1f1f1;
+        color: #3a0ca3;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .alphabet-filter a.active {
+        background-color: #3a0ca3;
+        color: white;
+    }
 </style>
 {% endblock %}
 
@@ -93,6 +117,16 @@
     <div class="hero-title">We understand your needs</div>
     <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
 
+    <!-- Alphabet filter -->
+    <div class="alphabet-filter">
+        {% for char in alphabet %}
+            <a href="?letter={{ char }}" class="{% if letter == char %}active{% endif %}">
+                {{ char }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- Search Box -->
     <div class="search-box">
         <form method="get" action="/">
             <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
@@ -100,6 +134,7 @@
         </form>
     </div>
 
+    <!-- Medicines List -->
     <div class="medicine-list">
         {% if medicines %}
             <h3>Search Results:</h3>
@@ -116,8 +151,4 @@
         {% endif %}
     </div>
 </div>
-
-<!-- Extra space to enable scroll behavior -->
-<div style="height: 2000px;"></div>
 {% endblock %}
-
