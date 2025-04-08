@@ -1,137 +1,140 @@
 {% extends 'catalog/base.html' %}
+{% load static %}
 
 {% block title %}Home - MediQuick{% endblock %}
 
 {% block extra_styles %}
-body {
-    font-family: Arial, sans-serif;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    padding-top: 80px;
-}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        margin: 0;
+        padding: 0;
+        padding-top: 80px;
+    }
 
-.top-bar {
-    background-color: white;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 26px;
-    font-weight: bold;
-    color: #3a0ca3;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    transition: top 0.3s ease;
-}
+    .top-bar {
+        background-color: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 26px;
+        font-weight: bold;
+        color: #3a0ca3;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        transition: top 0.3s ease;
+    }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-}
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
 
-.logo-container img {
-    width: 90px;
-    height: auto;
-    margin-right: 10px;
-}
+    .logo-container img {
+        width: 90px;
+        height: auto;
+        margin-right: 10px;
+    }
 
-.nav-links {
-    font-size: 18px;
-}
+    .nav-links {
+        font-size: 18px;
+    }
 
-.nav-links a {
-    margin-top: 10px;
-    margin-right: 60px;
-    text-decoration: none;
-    color: #3a0ca3;
-    font-weight: bold;
-}
+    .nav-links a {
+        margin-top: 10px;
+        margin-right: 60px;
+        text-decoration: none;
+        color: #3a0ca3;
+        font-weight: bold;
+    }
 
-.hero-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-    text-align: center;
-    padding: 20px;
-    margin-top: 100px;
-}
+    .hero-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+        text-align: center;
+        padding: 20px;
+        margin-top: 100px;
+    }
 
-.hero-title {
-    font-size: 36px;
-    font-weight: bold;
-    color: #333;
-}
+    .hero-title {
+        font-size: 36px;
+        font-weight: bold;
+        color: #333;
+    }
 
-.hero-description {
-    font-size: 18px;
-    color: #666;
-    margin-top: 10px;
-    max-width: 600px;
-}
+    .hero-description {
+        font-size: 18px;
+        color: #666;
+        margin-top: 10px;
+        max-width: 600px;
+    }
 
-.search-box {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 10px;
-    border-radius: 50px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-}
+    .search-box {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 10px;
+        border-radius: 50px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+    }
 
-.search-box input {
-    border: none;
-    outline: none;
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 50px;
-}
+    .search-box input {
+        border: none;
+        outline: none;
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 50px;
+    }
 
-.search-box button {
-    background-color: #4cc9f0;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 50px;
-    margin-left: 10px;
-    cursor: pointer;
-}
+    .search-box button {
+        background-color: #4cc9f0;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 50px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
 
-.search-box button:hover {
-    background-color: #ffc8dd;
-}
+    .search-box button:hover {
+        background-color: #ffc8dd;
+    }
 
-.medicine-list {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .medicine-list {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.medicine-item {
-    background: #f9f9f9;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 80%;
-}
+    .medicine-item {
+        background: #f9f9f9;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 80%;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 <div class="top-bar">
     <div class="logo-container">
-        <img src="{% static 'images/logo.png' %}" alt="Mediquick Logo">
-        <span>Mediquick</span>
+        <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo">
+        <span>MediQuick</span>
     </div>
     <div class="nav-links">
         <a href="{% url 'about' %}">About us</a>
@@ -167,23 +170,23 @@ body {
     </div>
 </div>
 
-<!-- Extra height to make scroll trigger work -->
-<div style="height: 1500px;"></div>
+<!-- Extra space to enable scroll behavior -->
+<div style="height: 2000px;"></div>
 {% endblock %}
 
 {% block extra_scripts %}
 <script>
+    let lastScrollTop = 0;
+    const topBar = document.querySelector('.top-bar');
+
     document.addEventListener('DOMContentLoaded', function () {
-        const topBar = document.querySelector('.top-bar');
-        let lastScrollTop = 0;
-
         window.addEventListener('scroll', function () {
-            const currentScroll = window.scrollY || document.documentElement.scrollTop;
+            let currentScroll = window.scrollY || document.documentElement.scrollTop;
 
-            if (currentScroll > lastScrollTop && currentScroll > 50) {
-                topBar.style.top = `-${topBar.offsetHeight}px`; // scroll down → hide
+            if (currentScroll > lastScrollTop && currentScroll > topBar.offsetHeight) {
+                topBar.style.top = `-${topBar.offsetHeight}px`;
             } else {
-                topBar.style.top = "0"; // scroll up → show
+                topBar.style.top = "0";
             }
 
             lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
