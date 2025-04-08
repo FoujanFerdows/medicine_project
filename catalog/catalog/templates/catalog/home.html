@@ -171,6 +171,7 @@
     <div class="search-box">
         <form method="get" action="/">
             <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
+            <input type="hidden" name="search_type" id="search-type" value="medicine">
             <button type="submit">Search</button>
         </form>
     </div>
@@ -193,8 +194,16 @@
                     <p>{{ medicine.description }}</p>
                 </div>
             {% endfor %}
+        {% elif symptoms %}
+            <h3>Symptom Results:</h3>
+            {% for symptom in symptoms %}
+                <div class="medicine-item">
+                    <h4>{{ symptom.name }}</h4>
+                    <p>{{ symptom.description }}</p>
+                </div>
+            {% endfor %}
         {% else %}
-            <p>No medicines found for "{{ search_query }}".</p>
+            <p>No results found for "{{ search_query }}".</p>
         {% endif %}
     </div>
 </div>
@@ -209,8 +218,16 @@
     function toggleSearchMode() {
         let searchToggle = document.getElementById("search-toggle");
         let searchInput = document.querySelector("input[name='q']");
-        let searchPlaceholder = searchToggle.checked ? "Search by Symptoms..." : "Search for Medicines...";
-        searchInput.placeholder = searchPlaceholder;
+        let searchTypeInput = document.getElementById("search-type");
+
+        if (searchToggle.checked) {
+            searchInput.placeholder = "Search by Symptoms...";
+            searchTypeInput.value = "symptom";  // Switch to search symptoms
+        } else {
+            searchInput.placeholder = "Search for Medicines...";
+            searchTypeInput.value = "medicine";  // Switch to search medicines
+        }
     }
 </script>
 {% endblock %}
+
