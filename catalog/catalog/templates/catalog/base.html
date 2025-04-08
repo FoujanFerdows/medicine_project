@@ -71,20 +71,6 @@
 
 <body>
 
-    <!-- Fixed Taskbar -->
-    <header class="taskbar">
-        <div class="logo-section" style="display: flex; align-items: center;">
-            <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo">
-            <h1 class="site-name">MediQuick</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="{% url 'about' %}">About Us</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <!-- Prevent content from being hidden behind the taskbar -->
     <div class="header-spacer"></div>
