@@ -3,7 +3,7 @@ from .models import Medicine, Symptom, ShoppingList  # Import Symptom model for 
 
 # Home view to display all medicines or search results
 def home(request):
-    # Fetch all medicines and symptoms by default
+    # Fetch all medicines by default
     medicines = Medicine.objects.all()
     symptoms = Symptom.objects.all()  # Fetch all symptoms by default
 
@@ -88,3 +88,5 @@ def signup_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'catalog/signup.html', {'form': form})
+
+
