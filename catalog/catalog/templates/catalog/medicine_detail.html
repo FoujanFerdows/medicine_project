@@ -50,11 +50,11 @@
 
         /* Green button styles */
         .add-to-list-button {
-            background-color: #28a745;  /* Green background */
+            background-color: #28a745;
         }
 
         .add-to-list-button:hover {
-            background-color: #218838;  /* Darker green on hover */
+            background-color: #218838;
         }
 
         .button-container {
@@ -69,26 +69,29 @@
         <h1>{{ medicine.name }}</h1>
 
         <p><strong>Description:</strong> {{ medicine.description }}</p>
-
         <p><strong>Active Ingredients:</strong> {% if medicine.active_ingredients %}{{ medicine.active_ingredients }}{% else %}Not available{% endif %}</p>
-
         <p><strong>Usage Instructions:</strong> {% if medicine.usage_instructions %}{{ medicine.usage_instructions }}{% else %}Not available{% endif %}</p>
-
         <p><strong>Side Effects:</strong> {% if medicine.side_effects %}{{ medicine.side_effects }}{% else %}Not available{% endif %}</p>
-
         <p><strong>Availability:</strong> {{ medicine.get_availability_display }}</p>
-
         <p><strong>Price:</strong> ${{ medicine.price }}</p>
-
         <p><strong>Category:</strong> {{ medicine.category.name }}</p>
-
         <p><strong>Symptoms:</strong> {% if medicine.symptoms %}{{ medicine.symptoms }}{% else %}Not available{% endif %}</p>
 
         <!-- Buttons -->
         <div class="button-container">
             <a href="/" class="back-button">Back to Home</a>
-            <a href="{% url 'add_to_shopping_list' medicine.pk %}" class="add-to-list-button">Add to My Shopping List</a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'add_to_shopping_list' medicine.pk %}" class="add-to-list-button">
+                    Add to My Shopping List
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}?next={% url 'medicine_detail' pk=medicine.pk %}" class="add-to-list-button">
+                    Log in to Add to My Shopping List
+                </a>
+            {% endif %}
         </div>
     </div>
 </body>
 </html>
+
