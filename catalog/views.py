@@ -70,8 +70,16 @@ def about(request):
 
 # Contact page view
 def contact(request):
-    return render(request, 'catalog/contact.html')
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        email = request.POST.get('email')
 
+        # Process the form data (e.g., save to database, send email, etc.)
+        # For now, just return a success message
+        return HttpResponse(f"Thank you for contacting us, {email}!")
+
+    return render(request, 'catalog/contact.html')
 # Login view (you can later add authentication logic here)
 def login_view(request):
     return render(request, 'catalog/login.html')
