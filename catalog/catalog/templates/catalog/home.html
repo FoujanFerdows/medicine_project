@@ -1,27 +1,74 @@
 {% extends 'catalog/base.html' %}
-{% load static %}
 
 {% block title %}Home - MediQuick{% endblock %}
 
-{% block extra_styles %}
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: white;
-        margin: 0;
-        padding: 0;
-        padding-top: 80px;
+{% block content %}
+{% load static %}  <!-- Ensure this is added to load static files -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediquick - Medicine Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            padding-top: 80px;  /* Ensure there's space for the fixed top bar */
+        }
+
+        .top-bar {
+            background-color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #3a0ca3;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: top 0.3s ease;  /* Smooth transition for hide/show */
+        }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
     }
 
-    .hero-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        text-align: center;
-        padding: 20px;
+    .logo-container img {
+        width: 90px;
+        height: auto;
+        margin-right: 10px;
     }
+
+    .nav-links {
+        font-size: 18px;
+    }
+
+    .nav-links a {
+        margin-top: 10px;
+        margin-right: 60px;
+        text-decoration: none;
+        color: #3a0ca3;
+        font-weight: bold;
+    }
+
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            text-align: center;
+            padding: 20px;
+            margin-top: 0;  /* Make sure the hero section is below the fixed top bar */
+        }
 
     .hero-title {
         font-size: 36px;
@@ -70,23 +117,6 @@
         background-color: #ffc8dd;
     }
 
-    .search-toggle {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-    }
-
-    .search-toggle label {
-        font-size: 16px;
-        margin-right: 10px;
-    }
-
-    .search-toggle input[type="radio"] {
-        margin-left: 5px;
-        cursor: pointer;
-    }
-
     .medicine-list {
         margin-top: 20px;
         display: flex;
@@ -94,86 +124,86 @@
         align-items: center;
     }
 
-    .medicine-item {
-        background: #f9f9f9;
-        padding: 15px;
-        margin: 10px 0;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        width: 80%;
-    }
+        .medicine-item {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 80%;
+        }
+    </style>
+</head>
 
-    .alphabet-filter {
-        margin-top: 30px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
+<body>
+    <div class="top-bar">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Mediquick Logo">
+            <span>Mediquick</span>
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'about' %}">About us</a>
+            <a href="{% url 'contact' %}">Contact us</a>
+            <a href="#">Login</a>
+        </div>
+    </div>
 
-    .alphabet-filter a {
-        text-decoration: none;
-        padding: 8px 12px;
-        border-radius: 4px;
-        background-color: #f1f1f1;
-        color: #3a0ca3;
-        font-weight: bold;
-        font-size: 16px;
-    }
+    <div class="hero-section">
+        <div class="hero-title">We understand your needs</div>
+        <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
 
-    .alphabet-filter a.active {
-        background-color: #3a0ca3;
-        color: white;
-    }
-</style>
+        <!-- Search Form -->
+        <div class="search-box">
+            <form method="get" action="/">
+                <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        
+        <!-- Medicine Search Results -->
+        <div class="medicine-list">
+            {% if medicines %}
+                <h3>Search Results:</h3>
+                {% for medicine in medicines %}
+                    <div class="medicine-item">
+                        <h4>
+                            <!-- Link to Medicine Detail Page -->
+                            <a href="{% url 'medicine_detail' pk=medicine.pk %}">{{ medicine.name }}</a>
+                        </h4>
+                        <p>{{ medicine.description }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No medicines found for "{{ search_query }}".</p>
+            {% endif %}
+        </div>
+    </div>
+
 {% endblock %}
 
-{% block content %}
-<div class="hero-section">
-    <div class="hero-title">We understand your needs</div>
-    <p class="hero-description">Mediquick enables you to quickly access information about your medicines and symptoms</p>
+<script>
+    let lastScrollTop = 0; // Variable to track last scroll position
+    const topBar = document.querySelector('.top-bar'); // The bar to hide/show
 
-    <!-- Search Box -->
-    <div class="search-box">
-        <form method="get" action="/">
-            <input type="text" name="q" placeholder="Search..." value="{{ search_query }}">
-            <button type="submit">Search</button>
-        </form>
-    </div>
+    // Make sure the script only runs after the DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('scroll', function () {
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-    <!-- Search toggle for selecting search type (Medicine or Symptom) -->
-    <div class="search-toggle">
-        <label for="search-medicine">Search by Medicine</label>
-        <input type="radio" name="search_type" id="search-medicine" value="medicine" {% if search_type == 'medicine' %}checked{% endif %}>
+            // Check scroll direction (up or down)
+            if (currentScroll > lastScrollTop) {
+                // Scrolling down - hide the top bar
+                topBar.style.top = "-80px"; // Adjust this to the height of your top bar
+            } else {
+                topBar.style.top = "0";
+            }
 
-        <label for="search-symptom">Search by Symptom</label>
-        <input type="radio" name="search_type" id="search-symptom" value="symptom" {% if search_type == 'symptom' %}checked{% endif %}>
-    </div>
+            // Update lastScrollTop with the current scroll position
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+    });
+</script>
 
-    <!-- Alphabet filter positioned below the search box -->
-    <div class="alphabet-filter">
-        {% for char in alphabet %}
-            <a href="?letter={{ char }}" class="{% if letter == char %}active{% endif %}">
-                {{ char }}
-            </a>
-        {% endfor %}
-    </div>
+</body>
 
-    <!-- Medicines List -->
-    <div class="medicine-list">
-        {% if medicines %}
-            <h3>Search Results:</h3>
-            {% for medicine in medicines %}
-                <div class="medicine-item">
-                    <h4>
-                        <a href="{% url 'medicine_detail' pk=medicine.pk %}">{{ medicine.name }}</a>
-                    </h4>
-                    <p>{{ medicine.description }}</p>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No results found for "{{ search_query }}".</p>
-        {% endif %}
-    </div>
-</div>
-{% endblock %}
+</html>
