@@ -11,7 +11,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 80vh;
             text-align: center;
             padding: 20px;
             margin-top: 5500px;  /* Make sure the hero section is below the fixed top bar */
@@ -84,15 +83,15 @@
 {% block content %}
    
 <!-- Hero Section -->
-    <div class="hero-section">
-        <div class="hero-title">We understand your needs</div>
-        <p class="hero-description">Mediquick enables you to quickly access information about your medicines</p>
-
-        <!-- Search Form -->
-        <div class="search-box">
-            <form method="get" action="/">
-                <input type="text" name="q" placeholder="Search for medicines..." value="{{ search_query }}">
-                <button type="submit">Search</button>
+      <div class="hero-section">
+            <div class="hero-title">We understand your needs</div>
+            <p class="hero-description">
+            MediQuick enables you to quickly access information about your medicines
+            </p>
+            <!-- Keep the search form here if you want it in the hero -->
+            <form method="get" action="/" class="search-box">
+            <input type="text" name="q" placeholder="Search for medicines…" value="{{ search_query }}">
+            <button type="submit">Search</button>
             </form>
         </div>
         
