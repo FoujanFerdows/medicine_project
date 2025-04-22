@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}MediQuick - Medicine Search{% endblock %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>{% block title %}MediQuick{% endblock %}</title>
 
+<<<<<<< HEAD
     {% load static %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 
@@ -60,10 +61,16 @@
     </style>
 
     {% block extra_styles %}{% endblock %}
+=======
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
+  
+  {% block extra_styles %}{% endblock %}
+>>>>>>> 8e39bf585149747380e83088228b81f7b737c218
 </head>
 
-
 <body>
+<<<<<<< HEAD
     <!-- Fixed Top Bar -->
     <header class="top-bar">
         <div class="logo-container">
@@ -79,32 +86,34 @@
             <a href="{% url 'login' %}">Login</a>
         </div>
     </header>
+=======
+  <header class="top-bar">
+    <a href="{% url 'home' %}" class="logo-link">
+      <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo">
+      <span>MediQuick</span>
+    </a>
+>>>>>>> 8e39bf585149747380e83088228b81f7b737c218
 
-    <!-- Add space below the fixed header -->
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    <script>
-        let lastScrollTop = 0; // Variable to track last scroll position
-        const topBar = document.querySelector('.top-bar'); // The bar to hide/show
-    
-        // Make sure the script only runs after the DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            window.addEventListener('scroll', function () {
-                let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    
-                // Check scroll direction (up or down)
-                if (currentScroll > lastScrollTop) {
-                    // Scrolling down - hide the top bar
-                    topBar.style.top = "-80px"; // Adjust this to the height of your top bar
-                } else {
-                    topBar.style.top = "0";
-                }
-    
-                // Update lastScrollTop with the current scroll position
-                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-            });
-        });
-    </script>
+    <nav class="nav-links">
+      <a href="{% url 'about' %}">About us</a>
+      <a href="{% url 'contact' %}">Contact us</a>
+      <a href="{% url 'login' %}">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- your scroll‑hide JS can stay here -->
+  <script>
+    let lastScroll = 0;
+    const bar = document.querySelector('.top-bar');
+    window.addEventListener('scroll', () => {
+      const st = window.pageYOffset;
+      bar.style.top = (st > lastScroll) ? '-80px' : '0';
+      lastScroll = st <= 0 ? 0 : st;
+    });
+  </script>
 </body>
 </html>
