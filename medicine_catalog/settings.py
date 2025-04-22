@@ -116,3 +116,19 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # Optional, only needed in production
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Who sends the email
+DEFAULT_FROM_EMAIL = 'webmaster@yourdomain.com'
+# Who receives contact‑form emails
+CONTACT_EMAIL      = 'khat31204@gmail.com'
+
+# For development you can use the console backend:
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# In production, switch to SMTP or an email service:
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST        = 'smtp.gmail.com'
+# EMAIL_PORT        = 587
+# EMAIL_USE_TLS     = True
+# EMAIL_HOST_USER   = 'your-smtp-username'
+# EMAIL_HOST_PASSWORD = 'your-smtp-password'
