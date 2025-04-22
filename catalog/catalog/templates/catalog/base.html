@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}MediQuick{% endblock %}</title>
+    <title>{% block title %}MediQuick - Medicine Search{% endblock %}</title>
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 
     <style>
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            margin-top: 80px; /* Ensure there's space for the fixed top bar */
         }
 
         .top-bar {
@@ -59,6 +62,7 @@
     {% block extra_styles %}{% endblock %}
 </head>
 
+
 <body>
     <!-- Fixed Top Bar -->
     <header class="top-bar">
@@ -74,27 +78,30 @@
     </header>
 
     <!-- Add space below the fixed header -->
-    <main style="padding-top: 90px;">
+    <main style="padding-top: 100px;">
         {% block content %}{% endblock %}
     </main>
-
     <script>
-        const topBar = document.querySelector('.top-bar');
-        let lastScrollTop = 0;
-
-        window.addEventListener('scroll', function () {
-            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (currentScroll > lastScrollTop && currentScroll > topBar.offsetHeight) {
-                topBar.style.top = `-${topBar.offsetHeight}px`;
-            } else {
-                topBar.style.top = "0";
-            }
-
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        let lastScrollTop = 0; // Variable to track last scroll position
+        const topBar = document.querySelector('.top-bar'); // The bar to hide/show
+    
+        // Make sure the script only runs after the DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('scroll', function () {
+                let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    
+                // Check scroll direction (up or down)
+                if (currentScroll > lastScrollTop) {
+                    // Scrolling down - hide the top bar
+                    topBar.style.top = "-80px"; // Adjust this to the height of your top bar
+                } else {
+                    topBar.style.top = "0";
+                }
+    
+                // Update lastScrollTop with the current scroll position
+                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+            });
         });
     </script>
-
-    {% block extra_scripts %}{% endblock %}
 </body>
 </html>
