@@ -5,94 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>{% block title %}MediQuick{% endblock %}</title>
 
-<<<<<<< HEAD
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            margin: 0;
-            padding: 0;
-            padding-top: 80px; /* Ensure there's space for the fixed top bar */
-        }
-
-        .top-bar {
-            background-color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 26px;
-            font-weight: bold;
-            color: #3a0ca3;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: top 0.3s ease;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-container img {
-            width: 100px;
-            height: auto;
-            margin-right: 10px;
-        }
-
-        .nav-links {
-            font-size: 18px;
-        }
-
-        .nav-links a {
-            margin-top: 10px;
-            margin-right: 60px;
-            text-decoration: none;
-            color: #3a0ca3;
-            font-weight: bold;
-        }
-    </style>
-
-    {% block extra_styles %}{% endblock %}
-=======
   {% load static %}
   <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
   
   {% block extra_styles %}{% endblock %}
->>>>>>> 8e39bf585149747380e83088228b81f7b737c218
 </head>
 
 <body>
-<<<<<<< HEAD
-    <!-- Fixed Top Bar -->
-    <header class="top-bar">
-        <div class="logo-container">
-            <!-- Wrap these two elements in a link -->
-            <a href="{% url 'home' %}" class="logo-link">
-                <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo">
-                <span>MediQuick</span>
-                </a>
-        </div>
-        <div class="nav-links">
-            <a href="{% url 'about' %}">About us</a>
-            <a href="{% url 'contact' %}">Contact us</a>
-            <a href="{% url 'login' %}">Login</a>
-        </div>
-    </header>
-=======
   <header class="top-bar">
     <a href="{% url 'home' %}" class="logo-link">
       <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo">
       <span>MediQuick</span>
     </a>
->>>>>>> 8e39bf585149747380e83088228b81f7b737c218
 
     <nav class="nav-links">
       <a href="{% url 'about' %}">About us</a>
