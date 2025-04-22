@@ -14,7 +14,7 @@
             height: 80vh;
             text-align: center;
             padding: 20px;
-            margin-top: 150px;  /* Make sure the hero section is below the fixed top bar */
+            margin-top: 200px;  /* Make sure the hero section is below the fixed top bar */
         }
         .contact-form {
             background-color: white;
@@ -59,17 +59,6 @@
 
 <!-- Contact Section -->
 
-    <div class="top-bar">
-        <div class="logo-container">
-            <img src="{% static 'images/logo.png' %}" alt="Mediquick Logo" class="logo">
-            <span>Mediquick</span>
-        </div>
-        <div class="nav-links">
-            <a href="{% url 'about' %}">About us</a>
-            <a href="{% url 'contact' %}">Contact us</a>
-            <a href="#">Login</a>
-        </div>
-    </div>
     <div class="contact-form">
         <h1>Contact Us</h1>
         <form method="post" action="{% url 'contact' %}">
