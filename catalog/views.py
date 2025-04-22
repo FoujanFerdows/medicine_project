@@ -1,5 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Medicine, Symptom, ShoppingList  # Import Symptom model for symptom search
+from django.core.mail import send_mail
+from django.conf import settings
+
+from .forms import ContactForm
+from .models import ContactSubmission
 
 # Home view to display all medicines or search results
 def home(request):
