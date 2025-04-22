@@ -1,57 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Contact Us</title>
+{% extends 'catalog/base.html' %}
+
+{% block title %}Home - MediQuick{% endblock %}
+
+{% load static %}  <!-- Ensure this is added to load static files -->
+
+{% block extra_styles %}
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            margin: 0;
-            padding: 0;
-            padding-top: 80px;  /* Ensure there's space for the fixed top bar */
-        }
-
-        .top-bar {
-            background-color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 26px;
-            font-weight: bold;
-            color: #3a0ca3;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: top 0.3s ease;  /* Smooth transition for hide/show */
-        }
-
-    .logo-container {
-        display: flex;
-        align-items: center;
-    }
-
-    .logo-container img {
-        width: 90px;
-        height: auto;
-        margin-right: 10px;
-    }
-
-    .nav-links {
-        font-size: 18px;
-    }
-
-    .nav-links a {
-        margin-top: 10px;
-        margin-right: 60px;
-        text-decoration: none;
-        color: #3a0ca3;
-        font-weight: bold;
-    }
         .contact-section {
             display: flex;
             flex-direction: column;
@@ -99,9 +53,12 @@
             background-color: #3a8fbd;
         }
     </style>
-    {% load static %}  <!-- Load static files tag -->
-</head>
-<body>
+{% endblock %}
+
+{% block content %}  
+
+<!-- Contact Section -->
+
     <div class="top-bar">
         <div class="logo-container">
             <img src="{% static 'images/logo.png' %}" alt="Mediquick Logo" class="logo">
@@ -129,5 +86,5 @@
             <button type="submit">Submit</button>
         </form>
     </div>
-</body>
-</html>
+
+{% endblock %}
