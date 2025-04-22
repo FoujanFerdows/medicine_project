@@ -70,16 +70,34 @@ def about(request):
 
 # Contact page view
 def contact(request):
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        email = request.POST.get('email')
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            ContactSubmission.objects.create(
+                title       = cd['title'],
+                description = cd['description'],
+                email       = cd['email'],
+            )
+            send_mail(
+                subject=f"[MediQuick] New Contact: {cd['title']}",
+                message=(
+                    f"New submission from {cd['email']}\n\n"
+                    f"Title: {cd['title']}\n\n"
+                    f"Message:\n{cd['description']}"
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.CONTACT_EMAIL],
+                fail_silently=False,
+            )
+            return redirect('contact_thanks')
+    else:
+        form = ContactForm()
+    return render(request, 'catalog/contact.html', {'form': form})
 
-        # Process the form data (e.g., save to database, send email, etc.)
-        # For now, just return a success message
-        return HttpResponse(f"Thank you for contacting us, {email}!")
-
-    return render(request, 'catalog/contact.html')
+def contact_thanks(request):
+    return render(request, 'catalog/contact_thanks.html')
+    
 # Login view (you can later add authentication logic here)
 def login_view(request):
     return render(request, 'catalog/login.html')
