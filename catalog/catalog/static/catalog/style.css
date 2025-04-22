@@ -30,11 +30,7 @@ main {
   width: 60px;            /* match your old 90px ⇢ feel free to tweak */
   margin-right: 10px;
 }
-.logo-link span {
-  font-size: 26px;
-  font-weight: bold;
-  color: #3a0ca3;
-}
+.logo-link span,
 .site-name {
   font-size: 26px;
   font-weight: bold;
