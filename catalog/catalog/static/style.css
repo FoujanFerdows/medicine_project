@@ -44,7 +44,21 @@ nav a {
     text-decoration: none;
     color: inherit; /* keep your purple text color */
 }
+.logo-link span {
+    text-decoration: none;
+    display: inline-block;  /* keep it on the same line */
+    margin: 0;
+}
+      
+      /* ensure hover/focus don’t add underlines */
+.logo-link:hover,
+.logo-link:focus {
+    text-decoration: none;
+    color: inherit;
+}
+      
+      /* keep your spacing */
 .logo-link img {
-    margin-right: 10px; /* same spacing you had before */
+    margin-right: 10px;
 }
 
