@@ -63,17 +63,21 @@
         <h1>Contact Us</h1>
         <form method="post" action="{% url 'contact' %}">
             {% csrf_token %}
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" required>
+            {{ form.non_field_errors }}
+            
+            <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+            {{ form.title }}  
+            {{ form.title.errors }}
 
-            <label for="description">Description</label>
-            <textarea id="description" name="description" rows="5" required></textarea>
+            <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+            {{ form.description }}
+            {{ form.description.errors }}
 
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" required>
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            {{ form.email }}
+            {{ form.email.errors }}
 
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-
+    <button type="submit">Submit</button>
+  </form>
+</div>
 {% endblock %}
