@@ -1,109 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}MediQuick - Medicine Search{% endblock %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>{% block title %}MediQuick{% endblock %}</title>
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            margin: 0;
-            padding: 0;
-            padding-top: 80px; /* Ensure there's space for the fixed top bar */
-        }
-
-        .top-bar {
-            background-color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 26px;
-            font-weight: bold;
-            color: #3a0ca3;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: top 0.3s ease;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-container img {
-            width: 90px;
-            height: auto;
-            margin-right: 10px;
-        }
-
-        .nav-links {
-            font-size: 18px;
-        }
-
-        .nav-links a {
-            margin-top: 10px;
-            margin-right: 60px;
-            text-decoration: none;
-            color: #3a0ca3;
-            font-weight: bold;
-        }
-    </style>
-
-    {% block extra_styles %}{% endblock %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
+  
+  {% block extra_styles %}{% endblock %}
 </head>
 
-
 <body>
-    <!-- Fixed Top Bar -->
-    <header class="top-bar">
-        <div class="logo-container">
-            <!-- Wrap these two elements in a link -->
-            <a href="{% url 'home' %}" class="logo-link">
-                <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo">
-                <span>MediQuick</span>
-        </div>
-        <div class="nav-links">
-            <a href="{% url 'about' %}">About us</a>
-            <a href="{% url 'contact' %}">Contact us</a>
-            <a href="{% url 'login' %}">Login</a>
-        </div>
-    </header>
+  <header class="top-bar">
+    <a href="{% url 'home' %}" class="logo-link">
+      <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo">
+      <span>MediQuick</span>
+    </a>
 
-    <!-- Add space below the fixed header -->
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    <script>
-        let lastScrollTop = 0; // Variable to track last scroll position
-        const topBar = document.querySelector('.top-bar'); // The bar to hide/show
-    
-        // Make sure the script only runs after the DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            window.addEventListener('scroll', function () {
-                let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    
-                // Check scroll direction (up or down)
-                if (currentScroll > lastScrollTop) {
-                    // Scrolling down - hide the top bar
-                    topBar.style.top = "-80px"; // Adjust this to the height of your top bar
-                } else {
-                    topBar.style.top = "0";
-                }
-    
-                // Update lastScrollTop with the current scroll position
-                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-            });
-        });
-    </script>
+    <nav class="nav-links">
+      <a href="{% url 'about' %}">About us</a>
+      <a href="{% url 'contact' %}">Contact us</a>
+      <a href="{% url 'login' %}">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- your scroll‑hide JS can stay here -->
+  <script>
+    let lastScroll = 0;
+    const bar = document.querySelector('.top-bar');
+    window.addEventListener('scroll', () => {
+      const st = window.pageYOffset;
+      bar.style.top = (st > lastScroll) ? '-80px' : '0';
+      lastScroll = st <= 0 ? 0 : st;
+    });
+  </script>
 </body>
 </html>
