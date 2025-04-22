@@ -38,3 +38,13 @@ nav a {
     font-weight: bold;
     color: #4a148c;
 }
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit; /* keep your purple text color */
+}
+.logo-link img {
+    margin-right: 10px; /* same spacing you had before */
+}
+
