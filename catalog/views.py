@@ -11,6 +11,7 @@ from django.contrib.auth        import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views  import PasswordChangeView
 from django.urls                import reverse_lazy
+from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 
 # Home view to display all medicines or search results
 def home(request):
