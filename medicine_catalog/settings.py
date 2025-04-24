@@ -132,3 +132,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_USE_TLS     = True
 # EMAIL_HOST_USER   = 'your-smtp-username'
 # EMAIL_HOST_PASSWORD = 'your-smtp-password'
+
+MEDIA_URL  = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_URL = '/login/'
+
+LOGIN_REDIRECT_URL = '/'

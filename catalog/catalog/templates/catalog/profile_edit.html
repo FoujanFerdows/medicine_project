@@ -1,0 +1,11 @@
+{% extends 'catalog/base.html' %}
+{% block title %}Edit Profile – MediQuick{% endblock %}
+{% block content %}
+  <h2>Edit Your Info</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ u_form.as_p }}
+    {{ p_form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+{% endblock %}
