@@ -6,6 +6,12 @@ from django.conf import settings
 from .forms import ContactForm
 from .models import ContactSubmission
 
+from django.shortcuts           import render, redirect
+from django.contrib.auth        import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views  import PasswordChangeView
+from django.urls                import reverse_lazy
+
 # Home view to display all medicines or search results
 def home(request):
     # Fetch all medicines by default
@@ -110,14 +116,41 @@ def login_view(request):
 from django.contrib.auth.forms import UserCreationForm  # Add this import at the top with the others
 
 # Signup view
-def signup_view(request):
+
+def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')  # Redirect to login page after successful signup
+            user = form.save()
+            login(request, user)                   # optional: log them in immediately
+            return redirect('profile')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'catalog/signup.html', {'form': form})
 
+@login_required
+def profile(request):
+    return render(request, 'catalog/profile.html')
+
+@login_required
+def profile_edit(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            return redirect('profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    return render(request, 'catalog/profile_edit.html', {
+        'u_form': u_form,
+        'p_form': p_form
+    })
+
+class MyPasswordChangeView(PasswordChangeView):
+    template_name      = 'catalog/password_change.html'
+    success_url        = reverse_lazy('profile')
 
