@@ -1,9 +1,25 @@
 {% extends 'catalog/base.html' %}
 {% block title %}Your Profile – MediQuick{% endblock %}
 {% block content %}
+
+<div class="profile-card">
   <h2>{{ user.get_full_name }}’s Profile</h2>
   <p><strong>Email:</strong> {{ user.email }}</p>
   <p><strong>Health status:</strong> {{ user.profile.health_status|linebreaks }}</p>
-  <a href="{% url 'profile_edit' %}">Edit Info</a> |
-  <a href="{% url 'password_change' %}">Change Password</a>
+
+  <div class="profile-actions" style="margin-top:20px;">
+    <a href="{% url 'profile_edit' %}">Edit Info</a> |
+    <a href="{% url 'password_change' %}">Change Password</a>
+    <form method="post"
+        action="{% url 'logout' %}"
+        style="display:inline; margin-left:10px;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-secondary">
+      Logout
+    </button>
+  </form>
+
+  </div>
+</div>
+
 {% endblock %}
