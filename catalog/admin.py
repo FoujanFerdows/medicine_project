@@ -3,6 +3,7 @@ from catalog.models import Medicine, Category, Symptom
 from .models import ContactSubmission
 from .models import Profile
 
+
 admin.site.register(Medicine)
 admin.site.register(Category)
 admin.site.register(Symptom) 

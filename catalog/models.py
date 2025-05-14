@@ -27,6 +27,7 @@ class Medicine(models.Model):
 
     price = models.DecimalField(max_digits=6, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    symptoms = models.ManyToManyField('Symptom', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -36,7 +37,7 @@ class Medicine(models.Model):
 # New Symptom model for symptom-based search
 class Symptom(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -76,4 +77,6 @@ def ensure_profile_exists(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     else:
         instance.profile.save()
+
+
 
