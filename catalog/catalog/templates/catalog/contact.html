@@ -1,84 +1,110 @@
 {% extends 'catalog/base.html' %}
-
-{% block title %}Home - MediQuick{% endblock %}
-
-{% load static %}  <!-- Ensure this is added to load static files -->
+{% load static %}
 
 {% block extra_styles %}
-    <style>
-        .contact-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 80vh;
-            text-align: center;
-            padding: 20px;
-            margin-top: 200px;  /* Make sure the hero section is below the fixed top bar */
-        }
-        .contact-form {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .contact-form h1 {
-            color: #3a0ca3;
-            margin-bottom: 20px;
-        }
-        .contact-form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: Arial, sans-serif;
-        }
-        .contact-form button {
-            background-color: #4cc9f0;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .contact-form button:hover {
-            background-color: #3a8fbd;
-        }
-    </style>
+<style>
+    :root {
+        --primary: #4da3ff;
+        --bg: #f4f8fc;
+        --text-color: #333;
+        --input-radius: 8px;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-section {
+        background: var(--bg);
+        padding: 60px 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contact-image {
+        flex: 1 1 300px;
+        max-width: 400px;
+        padding: 20px;
+    }
+
+    .contact-image img {
+        width: 100%;
+    }
+
+    .contact-form-wrapper {
+        flex: 1 1 400px;
+        padding: 20px;
+        background: white;
+        border-radius: var(--input-radius);
+        box-shadow: var(--shadow);
+    }
+
+    .contact-form h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: var(--primary);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+        padding: 12px 14px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: var(--input-radius);
+        font-size: 16px;
+        resize: vertical;
+    }
+
+    .contact-form button {
+        background: linear-gradient(to right, #4da3ff, #4dd0ff);
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: var(--input-radius);
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .contact-form button:hover {
+        background: linear-gradient(to right, #4dd0ff, #4da3ff);
+    }
+</style>
 {% endblock %}
 
-{% block content %}  
+{% block content %}
+<section class="contact-section">
+    <div class="contact-image">
+        <img src="{% static 'icons/envelope.png' %}" alt="Contact Icon">
+    </div>
 
-<!-- Contact Section -->
-
-    <div class="contact-form">
-        <h1>Contact Us</h1>
-        <form method="post" action="{% url 'contact' %}">
+    <div class="contact-form-wrapper">
+        <form method="POST" class="contact-form">
             {% csrf_token %}
+            <h2>Have Some Questions?</h2>
+
             {{ form.non_field_errors }}
-            
-            <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
-            {{ form.title }}  
-            {{ form.title.errors }}
 
-            <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
-            {{ form.description }}
-            {{ form.description.errors }}
+            <div>
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {{ form.title.errors }}
+            </div>
 
-            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
-            {{ form.email }}
-            {{ form.email.errors }}
+            <div>
+                {{ form.description.label_tag }}
+                {{ form.description }}
+                {{ form.description.errors }}
+            </div>
 
-    <button type="submit">Submit</button>
-  </form>
-</div>
+            <div>
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</section>
 {% endblock %}

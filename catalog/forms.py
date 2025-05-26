@@ -3,10 +3,35 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
+from django import forms
+
 class ContactForm(forms.Form):
-    title       = forms.CharField(max_length=150, label="Title")
-    description = forms.CharField(widget=forms.Textarea, label="Description")
-    email       = forms.EmailField(label="Email Address")
+    title = forms.CharField(
+        max_length=150,
+        label="Title",
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Enter a subject...',
+            'class': 'form-control'
+        })
+    )
+
+    description = forms.CharField(
+        label="Description",
+        widget=forms.Textarea(attrs={
+            'placeholder': 'Write your message...',
+            'class': 'form-control',
+            'rows': 5
+        })
+    )
+
+    email = forms.EmailField(
+        label="Email Address",
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'you@example.com',
+            'class': 'form-control'
+        })
+    )
+
 
 class SignUpForm(UserCreationForm):
     first_name    = forms.CharField(max_length=30, required=True, label="First Name")

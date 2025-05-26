@@ -1,99 +1,243 @@
 {% extends 'catalog/base.html' %}
-
-{% block title %}Home - MediQuick{% endblock %}
-
-{% load static %}  <!-- Ensure this is added to load static files -->
+{% load static %}
 
 {% block extra_styles %}
-    <style>
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            margin-top: 20px;
-        }
+<style>
+:root {
+    --primary: #4da3ff;
+    --light-bg: #f8f9fa;
+    --card-bg: #e6f0ff;
+    --title-font: 32px;
+    --text-font: 16px;
+    --name-font: 18px;
+}
 
-        .section-heading {
-            background-color: white;
-            color: black;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: left;
-            margin-bottom: 15px;
-        }
+/* HERO */
+.hero {
+    position: relative;
+    background: url("{% static 'images/banner_meds.jpg' %}") center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    z-index: 1;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+.hero h1 {
+    font-size: var(--title-font);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.hero p {
+    font-size: var(--text-font);
+    max-width: 700px;
+    margin: auto;
+}
 
-        .center-heading {
-            text-align: center;
-        }
+/* TEAM */
+.team-section {
+    background: var(--light-bg);
+    text-align: center;
+    padding: 60px 20px;
+}
+.team-section h2 {
+    font-size: var(--title-font);
+    margin-bottom: 40px;
+}
+.team-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+.team-member img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary);
+}
+.team-member p {
+    margin-top: 10px;
+    font-size: var(--text-font);
+}
+.team-member p strong {
+    display: block;
+    font-size: var(--name-font);
+    margin-bottom: 4px;
+}
 
-        .team-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+/* TIMELINE */
+.timeline-vertical {
+    background: var(--light-bg);
+    padding: 60px 20px;
+    position: relative;
+}
+.timeline-container {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    max-width: 1000px;
+}
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--primary);
+    transform: translateX(-50%);
+}
+.timeline-line::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 12px solid var(--primary);
+}
+.timeline-entry {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+    margin: 40px 0;
+}
+.timeline-entry.right {
+    justify-content: flex-end;
+}
+.timeline-card {
+    background: var(--card-bg);
+    padding: 25px 30px;
+    border-radius: 12px;
+    width: 40%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-left: 6px solid var(--primary);
+    transition: transform 0.3s ease;
+}
+.timeline-card:hover {
+    transform: scale(1.02);
+}
+.timeline-card h3 {
+    font-size: 20px;
+    margin-top: 0;
+    font-weight: bold;
+}
+.timeline-card p {
+    font-size: var(--text-font);
+    margin-bottom: 0;
+}
 
-        .team-member {
-            text-align: center;
-        }
-
-        .team-member img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #a2d2ff;
-        }
-    </style>
+/* VALUES */
+.values-section {
+    background: var(--light-bg);
+    padding: 60px 20px;
+    text-align: center;
+}
+.values-section h2 {
+    font-size: var(--title-font);
+    margin-bottom: 30px;
+}
+.values-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+.value-item {
+    max-width: 200px;
+}
+.value-item img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+.value-item p {
+    font-size: var(--text-font);
+}
+</style>
 {% endblock %}
 
-{% block content %} 
-        <div class="container">
+{% block content %}
+<!-- HERO -->
+<section class="hero">
+    <h1>About MediQuick</h1>
+    <p>Empowering users with reliable and accessible medicine information.</p>
+</section>
 
-        <!-- Hero Section -->
-        <section>
-            <div class="section-heading">About MediQuick</div>
-            <p>Empowering users with reliable and accessible medicine information.</p>
-            <p>At MediQuick, we aim to provide accurate and up-to-date information on medications to help people make informed healthcare decisions.</p>
-        </section>
-
-        <!-- Our Team -->
-        <section>
-            <div class="section-heading">Meet Our Team</div>
-            <p>We are a passionate group of professionals dedicated to bridging the gap between medicine and technology.</p>
-            <div class="team-container">
-                <div class="team-member">
-                    <img src="{% static 'images/jane_doe.jpg' %}" alt="Jane Doe">
-                    <p><strong>Jane Doe</strong><br>Founder & CEO</p>
-                </div>
-                <div class="team-member">
-                    <img src="{% static 'images/john_smith.jpg' %}" alt="Dr. John Smith">
-                    <p><strong>Dr. John Smith</strong><br>Chief Medical Officer</p>
-                </div>
-                <div class="team-member">
-                    <img src="{% static 'images/alex_brown.jpg' %}" alt="Alex Brown">
-                    <p><strong>Alex Brown</strong><br>Lead Developer</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Our Values -->
-        <section>
-            <div class="section-heading center-heading">Our Values</div>
-            <ul>
-                <li><strong>Accuracy:</strong> Reliable and evidence-based medical information.</li>
-                <li><strong>Accessibility:</strong> Free and easy-to-use medicine search tools.</li>
-                <li><strong>Innovation:</strong> Using technology to improve healthcare access.</li>
-            </ul>
-        </section>
-
-        <!-- Contact -->
-        <section>
-            <div class="section-heading center-heading">Contact Us</div>
-            <p>For inquiries, reach out at <a href="mailto:contact@mediquick.com">contact@mediquick.com</a></p>
-        </section>
-
+<!-- TEAM -->
+<section class="team-section">
+    <h2>Meet Our Team</h2>
+    <div class="team-grid">
+        <div class="team-member">
+            <img src="{% static 'images/jane_doe.jpg' %}" alt="Portrait of Jane Doe">
+            <p><strong>Jane Doe</strong><br><small>Founder & CEO</small></p>
         </div>
+        <div class="team-member">
+            <img src="{% static 'images/john_smith.jpg' %}" alt="Portrait of Dr. John Smith">
+            <p><strong>Dr. John Smith</strong><br><small>Chief Medical Officer</small></p>
+        </div>
+        <div class="team-member">
+            <img src="{% static 'images/alex_brown.jpg' %}" alt="Portrait of Alex Brown">
+            <p><strong>Alex Brown</strong><br><small>Lead Developer</small></p>
+        </div>
+    </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-vertical">
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-entry left">
+            <div class="timeline-card">
+                <h3>2024</h3>
+                <p>MediQuick was founded with a mission to simplify medicine access.</p>
+            </div>
+        </div>
+
+        <div class="timeline-entry right">
+            <div class="timeline-card">
+                <h3>2025</h3>
+                <p>10,000+ users helped with accurate and fast medicine information.</p>
+            </div>
+        </div>
+
+        <div class="timeline-entry left">
+            <div class="timeline-card">
+                <h3>Now</h3>
+                <p>Continually evolving through innovation and user trust.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+    <h2>Our Values</h2>
+    <div class="values-grid">
+        <div class="value-item">
+            <img src="{% static 'icons/accuracy.png' %}" alt="Target icon symbolizing accuracy">
+            <p><strong>Accuracy</strong><br>Reliable and evidence-based information.</p>
+        </div>
+        <div class="value-item">
+            <img src="{% static 'icons/accessibility.jpg' %}" alt="Accessibility icon">
+            <p><strong>Accessibility</strong><br>Free and easy-to-use tools for everyone.</p>
+        </div>
+        <div class="value-item">
+            <img src="{% static 'icons/innovation.png' %}" alt="Innovation icon">
+            <p><strong>Innovation</strong><br>We use tech to improve healthcare access.</p>
+        </div>
+    </div>
+</section>
 {% endblock %}
