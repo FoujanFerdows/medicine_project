@@ -7,13 +7,13 @@
 {% block extra_styles %}
     <style>
         .hero-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;  /* Make sure the hero section is below the fixed top bar */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px;  /* Make sure the hero section is below the fixed top bar */
         }
         .hero-title {
         font-size: 36px;
@@ -29,85 +29,100 @@
         }
         
         .search-box {
-        margin-top: 20px;
         display: flex;
+        flex-direction: column;
         align-items: center;
+        gap: 12px;
+        max-width: 600px;
+        margin: 20px auto;      /* center form on page */
+        }
+
+        .search-main {
+        display: flex;
+        width: 100%;
         background: white;
         padding: 10px;
         border-radius: 50px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        width: 400px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .search-box input {
+        .search-main input {
+        flex: 1;
         border: none;
         outline: none;
-        flex: 1;
         padding: 10px;
         font-size: 16px;
         border-radius: 50px;
         }
 
-        .search-box button {
+        .search-main button {
         background-color: #4cc9f0;
         border: none;
         color: white;
         padding: 10px 20px;
         border-radius: 50px;
-        margin-left: 90px;
+        margin-left: 10px;
         cursor: pointer;
-    }
+        }
 
-    .search-box button:hover {
-        background-color: #ffc8dd;
-    }
+        .search-main button:hover {
+        background-color: #3a8fbd;
+        }
 
-     /* Toggle stays centered */
         .search-toggle {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            gap: 20px;  /* Space between the labels and inputs */
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        }
+
+        .search-toggle label {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        cursor: pointer;
+        }
+
+        .search-toggle input {
+        margin-right: 6px;
         }
 
         /* Make the alphabet filter full-width and center its items */
         .alphabet-filter {
-            margin: 30px auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;         /* center all the links */
-            gap: 10px;
-            max-width: 600px;                /* optional: constrain width */
+        margin: 30px auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;         /* center all the links */
+        gap: 10px;
+        max-width: 600px;                /* optional: constrain width */
         }
         .alphabet-filter a {
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            background-color: #f1f1f1;
-            color: #3a0ca3;
-            font-weight: bold;
-            font-size: 16px;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        background-color: #f1f1f1;
+        color: #3a0ca3;
+        font-weight: bold;
+        font-size: 16px;
         }
         .alphabet-filter a.active {
-            background-color: #3a0ca3;
-            color: white;
+        background-color: #3a0ca3;
+        color: white;
         }
 
-    .medicine-list {
+        .medicine-list {
         margin-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
+        }
 
         .medicine-item {
-            background: #f9f9f9;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 80%;
+        background: #f9f9f9;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 80%;
         }
     </style>
 {% endblock %}
@@ -122,18 +137,39 @@
             </p>
             <!-- Keep the search form here if you want it in the hero -->
             <form method="get" action="/" class="search-box">
-            <input type="text" name="q" placeholder="Search for medicines…" value="{{ search_query }}">
-            <button type="submit">Search</button>
-            </form>
-        </div>
+  <!-- Row 1: the pill -->
+  <div class="search-main">
+    <input
+      type="text"
+      name="q"
+      placeholder="Search for medicines…"
+      value="{{ search_query }}"
+    >
+    <button type="submit">Search</button>
+  </div>
 
-        <!-- Search toggle for selecting search type (Medicine or Symptom) -->
-    <div class="search-toggle">
-        <label for="search-medicine">Search by Medicine</label>
-        <input type="radio" name="search_type" id="search-medicine" value="medicine" {% if search_type == 'medicine' %}checked{% endif %}>
-
-        <label for="search-symptom">Search by Symptom</label>
-        <input type="radio" name="search_type" id="search-symptom" value="symptom" {% if search_type == 'symptom' %}checked{% endif %}>
+  <!-- Row 2: the radios -->
+  <div class="search-toggle">
+    <label>
+      <input
+        type="radio"
+        name="search_type"
+        value="medicine"
+        {% if search_type == 'medicine' %}checked{% endif %}
+      >
+      Medicine
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="search_type"
+        value="symptom"
+        {% if search_type == 'symptom' %}checked{% endif %}
+      >
+      Symptom
+    </label>
+  </div>
+</form>
     </div>
 
     <!-- Alphabet filter positioned below the search box -->
