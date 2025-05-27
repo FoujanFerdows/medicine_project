@@ -4,44 +4,65 @@
 {% block extra_styles %}
 <style>
     :root {
-        --primary: #4da3ff;
-        --bg: #f4f8fc;
-        --text-color: #333;
-        --input-radius: 8px;
-        --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --primary:   #333;
+        --bg-page:   #f4f4f4;
+        --card-bg:   white;
+        --text-color:#333;
+        --radius:    8px;
+        --shadow:    0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    body {
+        background-color: var(--bg-page);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
     }
 
     .contact-section {
-        background: var(--bg);
+        background: transparent;
         padding: 60px 20px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        margin: 80px auto 0;
     }
 
     .contact-image {
         flex: 1 1 300px;
         max-width: 400px;
         padding: 20px;
+        margin-left: -40px;        /* shift the box 20px further left */
+        margin-right: 40px;
     }
 
     .contact-image img {
         width: 100%;
     }
 
-    .contact-form-wrapper {
-        flex: 1 1 400px;
-        padding: 20px;
-        background: white;
-        border-radius: var(--input-radius);
-        box-shadow: var(--shadow);
-    }
-
     .contact-form h2 {
         font-size: 28px;
-        margin-bottom: 20px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        margin-top: 0px;
         color: var(--primary);
+        text-align: center;
+    }
+
+    .contact-form-wrapper {
+        flex: 1 1 400px;
+        max-width: 500px;
+        background-color: var(--card-bg);
+        padding: 30px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+    }
+    .contact-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: var(--text-color);
     }
 
     .contact-form input,
@@ -50,24 +71,26 @@
         padding: 12px 14px;
         margin-bottom: 15px;
         border: 1px solid #ccc;
-        border-radius: var(--input-radius);
+        border-radius: 4px;
+        box-sizing: border-box;
         font-size: 16px;
-        resize: vertical;
+        font-family: inherit;
     }
 
     .contact-form button {
-        background: linear-gradient(to right, #4da3ff, #4dd0ff);
+        background-color: #4cc9f0;
         color: white;
-        padding: 12px 20px;
+        width: 100%;
+        padding: 12px;
         border: none;
-        border-radius: var(--input-radius);
+        border-radius: var(--radius);
         font-size: 16px;
         cursor: pointer;
-        transition: background 0.3s ease;
+        transition: background-color 0.3s ease;
     }
 
     .contact-form button:hover {
-        background: linear-gradient(to right, #4dd0ff, #4da3ff);
+        background: #3a8fbd;
     }
 </style>
 {% endblock %}
@@ -75,7 +98,7 @@
 {% block content %}
 <section class="contact-section">
     <div class="contact-image">
-        <img src="{% static 'icons/envelope.png' %}" alt="Contact Icon">
+        <img src="{% static 'icons/mail.png' %}" alt="Contact Icon">
     </div>
 
     <div class="contact-form-wrapper">
