@@ -1,8 +1,3 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Medicine, Symptom, ShoppingList  # Import Symptom model for symptom search
-from django.core.mail import send_mail
-from django.conf import settings
-
 from .forms import ContactForm
 from .models import ContactSubmission
 
@@ -15,9 +10,9 @@ from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 
 # Home view to display all medicines or search results
 def home(request):
+    print("⮕ home() GET:", dict(request.GET))
     # Fetch all medicines by default
-    medicines = Medicine.objects.all()
-    symptoms = Symptom.objects.all()  # Fetch all symptoms by default
+    medicines = Medicine.objects.all().prefetch_related('symptoms') 
 
     # Get the search query, letter, and search type from the URL
     search_query = request.GET.get('q', '')
@@ -25,22 +20,25 @@ def home(request):
     search_type = request.GET.get('search_type', 'medicine')  # Default to medicine search
 
     # Filter by search query if available
-    if search_query:
-        if search_type == 'medicine':
-            medicines = medicines.filter(name__icontains=search_query)
-        elif search_type == 'symptom':
-            symptoms = symptoms.filter(name__icontains=search_query)
-
-    # Filter by letter if selected (only for medicine)
     if letter:
         medicines = medicines.filter(name__istartswith=letter)
+
+    # 2) Else if they entered text, filter by name or symptom
+    elif search_query:
+        if search_type == 'medicine':
+            medicines = medicines.filter(name__icontains=search_query)
+        else:  # search_type == 'symptom'
+            medicines = (
+                medicines
+                .filter(symptoms__name__icontains=search_query)
+                .distinct()
+            )
 
     # Get the list of unique first letters for the alphabetical filter
     alphabet = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
 
     return render(request, 'catalog/home.html', {
         'medicines': medicines,
-        'symptoms': symptoms,
         'search_query': search_query,
         'alphabet': alphabet,  # Pass the alphabet list to the template
         'letter': letter,      # Pass the selected letter for active highlighting
