@@ -62,6 +62,38 @@
         background-color: #ffc8dd;
     }
 
+     /* Toggle stays centered */
+        .search-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 20px;  /* Space between the labels and inputs */
+        }
+
+        /* Make the alphabet filter full-width and center its items */
+        .alphabet-filter {
+            margin: 30px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;         /* center all the links */
+            gap: 10px;
+            max-width: 600px;                /* optional: constrain width */
+        }
+        .alphabet-filter a {
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background-color: #f1f1f1;
+            color: #3a0ca3;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .alphabet-filter a.active {
+            background-color: #3a0ca3;
+            color: white;
+        }
+
     .medicine-list {
         margin-top: 20px;
         display: flex;
@@ -94,6 +126,24 @@
             <button type="submit">Search</button>
             </form>
         </div>
+
+        <!-- Search toggle for selecting search type (Medicine or Symptom) -->
+    <div class="search-toggle">
+        <label for="search-medicine">Search by Medicine</label>
+        <input type="radio" name="search_type" id="search-medicine" value="medicine" {% if search_type == 'medicine' %}checked{% endif %}>
+
+        <label for="search-symptom">Search by Symptom</label>
+        <input type="radio" name="search_type" id="search-symptom" value="symptom" {% if search_type == 'symptom' %}checked{% endif %}>
+    </div>
+
+    <!-- Alphabet filter positioned below the search box -->
+    <div class="alphabet-filter">
+        {% for char in alphabet %}
+            <a href="?letter={{ char }}" class="{% if letter == char %}active{% endif %}">
+                {{ char }}
+            </a>
+        {% endfor %}
+    </div>
         
         <!-- Medicine Search Results -->
         {% if medicines %}
