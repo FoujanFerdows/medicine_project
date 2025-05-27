@@ -1,12 +1,89 @@
 {% extends 'catalog/base.html' %}
+{% load static %}
+
 {% block title %}Sign Up – MediQuick{% endblock %}
+
+{% block extra_styles %}
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+  }
+  .login-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 80px auto 0;   /* same offset as the login */
+  }
+  h1, h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  form p {
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 16px;
+  }
+  .login-button {
+    background-color: #4cc9f0;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .login-button:hover {
+    background-color: #3a8fbd;
+  }
+  .back-to-home {
+      text-align: center;
+      margin-top: 20px;
+  }
+  .back-to-home a {
+      color: #4cc9f0;
+      text-decoration: none;
+  }
+  .back-to-home a:hover {
+      text-decoration: underline;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
-  <h2>Create an Account</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-  </form>
+  <div class="login-container">
+    <h1>Create an Account</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="login-button">Sign Up</button>
+    </form>
+    <div class="back-to-home">
+      <p><a href="/">Back to Home</a></p>
+    </div>
+  </div>
 {% endblock %}
 
 
