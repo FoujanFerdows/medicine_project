@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+{% extends 'catalog/base.html' %}
+
+{% block title %}Login - MediQuick{% endblock %}
+
+{% load static %}  <!-- Ensure this is added to load static files -->
+
+{% block extra_styles %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,7 +18,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             max-width: 400px;
-            margin: 0 auto;
+            margin: 100px auto 0;
         }
         h1 {
             color: #333;
@@ -85,8 +86,9 @@
             text-decoration: underline;
         }
     </style>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 
     <div class="login-container">
         <h1>Login</h1>
@@ -129,6 +131,4 @@
             }
         }
     </script>
-
-</body>
-</html>
+{% endblock %}
