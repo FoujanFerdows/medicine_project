@@ -3,7 +3,8 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='home'),  # Home view with search and letter filter
+    path('', views.landing, name='landing'),
+    path('home/', views.home, name='home'), # Home view with search and letter filter
     path('medicine/<int:pk>/', views.medicine_detail, name='medicine_detail'),
     path('add_to_shopping_list/<int:medicine_id>/', views.add_to_shopping_list, name='add_to_shopping_list'),
     path('about/', views.about, name='about'),

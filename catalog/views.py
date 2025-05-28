@@ -13,6 +13,9 @@ from django.contrib.auth.views  import PasswordChangeView
 from django.urls                import reverse_lazy
 from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 
+def landing(request):
+    return render(request, 'catalog/landing.html')
+
 # Home view to display all medicines or search results
 def home(request):
     print("⮕ home() GET:", dict(request.GET))

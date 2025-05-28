@@ -13,7 +13,7 @@
 
 <body>
   <header class="top-bar">
-    <a href="{% url 'home' %}" class="logo-link">
+    <a href="{% url 'landing' %}" class="logo-link">
       <img src="{% static 'images/logo.png' %}" alt="MediQuick Logo">
       <span>MediQuick</span>
     </a>
@@ -45,5 +45,7 @@
       lastScroll = st <= 0 ? 0 : st;
     });
   </script>
+
+<script src="https://unpkg.com/scrollreveal"></script>
 </body>
 </html>
