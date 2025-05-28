@@ -47,37 +47,29 @@
     margin-bottom: 30px;
   }
 
-  .hero-buttons {
+  .hero-buttons.single-button {
     display: flex;
-    gap: 20px;
     justify-content: center;
-    flex-wrap: wrap;
   }
 
-  .hero-buttons a {
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background 0.3s ease;
+  .hero-buttons .cta-big {
+    background: linear-gradient(to right, #4CAF50, #81C784);
+    padding: 16px 36px;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
     color: white;
-  }
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-  .hero-buttons a.cta-green {
-    background: var(--green);
-  }
-
-  .hero-buttons a.cta-green:hover {
-    background: var(--green-hover);
-  }
-
-  .hero-buttons a.cta-orange {
-    background: var(--orange);
-  }
-
-  .hero-buttons a.cta-orange:hover {
-    background: var(--orange-hover);
-  }
+.hero-buttons .cta-big:hover {
+    background: linear-gradient(to right, #388E3C, #66BB6A);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
 
   .testimonials {
     background: var(--accent);
@@ -123,9 +115,8 @@
 <section class="hero">
   <h1>Welcome to MediQuick</h1>
   <p>Your trusted platform for fast, reliable and easy medicine access.</p>
-  <div class="hero-buttons">
-    <a href="{% url 'home' %}" class="cta-green">Browse Medicines</a>
-    <a href="#" class="cta-orange">Find by Symptom</a>
+  <div class="hero-buttons single-button">
+    <a href="{% url 'home' %}" class="cta-big">Start Now – Search by Medicine or Symptom</a>
   </div>
 </section>
 

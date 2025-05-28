@@ -3,7 +3,6 @@
 
 {% block extra_styles %}
 <style>
-    :root {
 :root {
   --primary: #4da3ff;
   --bg-page: #f4f4f4;
@@ -14,117 +13,121 @@
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-    }
+.contact-section {
+  background: transparent;
+  padding: 60px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 60px auto 0;
+  max-width: 1200px;
+}
 
-    .contact-section {
-        background: transparent;
-        padding: 60px 20px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin: 80px auto 0;
-    }
+.contact-image {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: -40px; 
+}
 
-    .contact-image {
-        flex: 1 1 300px;
-        max-width: 400px;
-        padding: 20px;
-        margin-left: -40px;        /* shift the box 20px further left */
-        margin-right: 40px;
-    }
+.contact-image img {
+  width: 100%;
+  max-width: 360px;  
+}
 
-    .contact-image img {
-        width: 100%;
-    }
+.contact-form-wrapper {
+  flex: 1 1 500px;
+  max-width: 600px;          
+  background-color: var(--card-bg);
+  padding: 40px;             
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-left: -20px;        
+}
 
-    .contact-form h2 {
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 30px;
-        margin-top: 0px;
-        color: var(--primary);
-        text-align: center;
-    }
+.contact-form h2 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 0px;
+  color: var(--primary);
+  text-align: center;
+}
 
-    .contact-form-wrapper {
-        flex: 1 1 400px;
-        max-width: 500px;
-        background-color: var(--card-bg);
-        padding: 30px;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-    }
-    .contact-form label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: var(--text-color);
-    }
+.contact-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--text-color);
+}
 
-    .contact-form input,
-    .contact-form textarea {
-        width: 100%;
-        padding: 12px 14px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-size: 16px;
-        font-family: inherit;
-    }
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: inherit;
+}
 
-    .contact-form button {
-        background-color: #4cc9f0;
-        color: white;
-        width: 100%;
-        padding: 12px;
-        border: none;
-        border-radius: var(--radius);
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+.contact-form button {
+  background: linear-gradient(to right, #4da3ff, #4dd0ff);
+  color: white;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
 
-    .contact-form button:hover {
-        background: #3a8fbd;
-    }
+.contact-form button:hover {
+  background: linear-gradient(to right, #3399ff, #00cfff);
+  transform: translateY(-1px);
+}
 </style>
 {% endblock %}
 
 {% block content %}
 <section class="contact-section">
-    <div class="contact-image">
-        <img src="{% static 'icons/mail.png' %}" alt="Contact Icon">
-    </div>
+  <div class="contact-image">
+    <img src="{% static 'icons/envelope.png' %}" alt="Contact Icon">
+  </div>
 
-    <div class="contact-form-wrapper">
-        <form method="POST" class="contact-form">
-            {% csrf_token %}
-            <h2>Have Some Questions?</h2>
+  <div class="contact-form-wrapper">
+    <form method="POST" class="contact-form">
+      {% csrf_token %}
+      <h2>Have Some Questions?</h2>
 
-            {{ form.non_field_errors }}
+      {{ form.non_field_errors }}
 
-            <div>
-                {{ form.title.label_tag }}
-                {{ form.title }}
-                {{ form.title.errors }}
-            </div>
+      <div>
+        {{ form.title.label_tag }}
+        {{ form.title }}
+        {{ form.title.errors }}
+      </div>
 
-            <div>
-                {{ form.description.label_tag }}
-                {{ form.description }}
-                {{ form.description.errors }}
-            </div>
+      <div>
+        {{ form.description.label_tag }}
+        {{ form.description }}
+        {{ form.description.errors }}
+      </div>
 
-            <div>
-                {{ form.email.label_tag }}
-                {{ form.email }}
-                {{ form.email.errors }}
-            </div>
+      <div>
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
 
-            <button type="submit">Send Message</button>
-        </form>
-    </div>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
 </section>
 {% endblock %}
