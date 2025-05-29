@@ -1,8 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ medicine.name }}</title>
+{% extends 'catalog/base.html' %}
+
+{% block title %}Home - MediQuick{% endblock %}
+
+{% load static %}  <!-- Ensure this is added to load static files -->
+
+{% block extra_styles %}
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,8 +66,10 @@
             margin-top: 20px;
         }
     </style>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
+   
     <div class="medicine-details">
         <h1>{{ medicine.name }}</h1>
 
@@ -92,5 +97,5 @@
             {% endif %}
         </div>
     </div>
-</body>
-</html>
+{% endblock %}
+
