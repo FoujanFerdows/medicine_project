@@ -43,17 +43,13 @@ class Symptom(models.Model):
         return self.name
 
 
-# New ShoppingList model
-class ShoppingList(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    medicines = models.ManyToManyField(Medicine)
-
+# New Medicine List
+class MedicineList(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='medicine_lists')
+    medicines = models.ManyToManyField('Medicine', blank=True, related_name='medicine_lists')
+    
     def __str__(self):
-        return f"Shopping List for {self.user.username}"
-
-
-    def __str__(self):
-        return f"Shopping List for {self.user.username}"
+        return f"Medicine List for {self.user.username}"
 
 class ContactSubmission(models.Model):
     title       = models.CharField(max_length=150)
@@ -77,6 +73,3 @@ def ensure_profile_exists(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     else:
         instance.profile.save()
-
-
-
