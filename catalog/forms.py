@@ -53,9 +53,7 @@ class SignUpForm(UserCreationForm):
         user.last_name  = self.cleaned_data['last_name']
         user.email      = self.cleaned_data['email']
         if commit:
-            user.save()
-            user.profile.health_status = self.cleaned_data['health_status']
-            user.profile.save()
+            user.save()           
         return user
 
 class UserUpdateForm(forms.ModelForm):
@@ -70,3 +68,4 @@ class ProfileUpdateForm(forms.ModelForm):
         widgets = {
             'health_status': forms.Textarea(attrs={'rows':4}),
         }
+  
