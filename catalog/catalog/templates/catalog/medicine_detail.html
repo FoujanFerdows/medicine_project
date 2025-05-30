@@ -1,20 +1,13 @@
 {% extends 'catalog/base.html' %}
-
-{% block title %}Home - MediQuick{% endblock %}
-
-{% load static %}  <!-- Ensure this is added to load static files -->
+{% load static %}
 
 {% block extra_styles %}
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
+        
         h1 {
             color: #333;
+            margin: 10px auto 0;
         }
         p {
             font-size: 16px;
@@ -38,7 +31,7 @@
         .medicine-details strong {
             color: #3a0ca3;
         }
-        a {
+        .button-container a {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
@@ -47,7 +40,7 @@
             text-decoration: none;
             border-radius: 5px;
         }
-        a:hover {
+        .button-container a:hover {
             background-color: #3a8fbd;
         }
 
@@ -80,15 +73,25 @@
         <p><strong>Availability:</strong> {{ medicine.get_availability_display }}</p>
         <p><strong>Price:</strong> ${{ medicine.price }}</p>
         <p><strong>Category:</strong> {{ medicine.category.name }}</p>
-        <p><strong>Symptoms:</strong> {% if medicine.symptoms %}{{ medicine.symptoms }}{% else %}Not available{% endif %}</p>
+        <p><strong>Symptoms:</strong>
+        {% if medicine.symptoms.all %}
+        <ul>
+            {% for symptom in medicine.symptoms.all %}
+                <li>{{ symptom.name }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <em>Based on prescription.</em>
+        {% endif %}
+        </p>
 
-        <!-- Buttons -->
+
         <div class="button-container">
-            <a href="/" class="back-button">Back to Home</a>
+            <a a href="{% url 'home' %}?search_type=medicine" class="back-button">Back to Home</a>
 
             {% if user.is_authenticated %}
-                <a href="{% url 'add_to_shopping_list' medicine.pk %}" class="add-to-list-button">
-                    Add to My Shopping List
+                <a href="{% url 'add_to_medicine_list' medicine.pk %}" class="add-to-list-button">
+                    Add to My Medicine List
                 </a>
             {% else %}
                 <a href="{% url 'login' %}?next={% url 'medicine_detail' pk=medicine.pk %}" class="add-to-list-button">
@@ -98,4 +101,5 @@
         </div>
     </div>
 {% endblock %}
+
 
