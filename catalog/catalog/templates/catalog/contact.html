@@ -4,7 +4,7 @@
 {% block extra_styles %}
 <style>
 :root {
-  --primary: #4da3ff;
+  --primary: #000;
   --bg-page: #f4f4f4;
   --card-bg: #fff;
   --text-color: #333;
@@ -78,21 +78,22 @@
 }
 
 .contact-form button {
-  background: linear-gradient(to right, #4da3ff, #4dd0ff);
-  color: white;
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: var(--radius);
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+    background-color: #4cc9f0;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 .contact-form button:hover {
-  background: linear-gradient(to right, #3399ff, #00cfff);
-  transform: translateY(-1px);
+  background-color: #3a8fbd
 }
 </style>
 {% endblock %}
