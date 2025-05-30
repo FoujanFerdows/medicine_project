@@ -44,6 +44,7 @@
             background-color: #3a8fbd;
         }
 
+        /* Green button styles */
         .add-to-list-button {
             background-color: #28a745;
         }
@@ -56,6 +57,41 @@
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
+        }
+
+        .map-section {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 1000px;
+        margin: 30px auto;  
+        }
+
+        .map-section h3 {
+        margin-top: 0;
+        color: #000; 
+        font-size: 24px;     
+        }
+
+        .map-section p {
+        margin-bottom: 16px;
+        color: #333;
+        }
+
+        .map-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;  /* 16:9 aspect */
+        overflow: hidden;
+        border-radius: 4px;
+        }
+
+        .map-container iframe {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        border: none;
         }
     </style>
 {% endblock %}
@@ -94,11 +130,29 @@
                 </a>
             {% else %}
                 <a href="{% url 'login' %}?next={% url 'medicine_detail' pk=medicine.pk %}" class="add-to-list-button">
-                    Log in to Add to My Shopping List
+                    Log in to Add to My Medicine List
                 </a>
             {% endif %}
         </div>
     </div>
+
+
+        <div class="map-section">
+        <h3>Where to Buy</h3>
+        <p>
+            Find near local pharmacies that carry
+            <strong>{{ medicine.name }}</strong>:
+        </p>
+
+        <div class="map-container">
+            <iframe
+            src="https://www.google.com/maps?q={{ medicine.name|urlencode }}+pharmacy+near+me&output=embed"
+            loading="lazy"
+            allowfullscreen>
+            </iframe>
+        </div>
+        </div>
+
 {% endblock %}
 
 
