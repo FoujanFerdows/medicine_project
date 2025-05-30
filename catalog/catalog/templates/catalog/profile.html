@@ -1,25 +1,189 @@
 {% extends 'catalog/base.html' %}
+{% load static %}
+
 {% block title %}Your Profile – MediQuick{% endblock %}
+
+{# ─── Page-specific CSS ─── #}
+{% block extra_styles %}
+<style>
+  /* ─── layout ─── */
+  :root {
+  --primary: #4da3ff;
+  --bg-page: #f4f4f4;
+  --card-bg: #fff;
+  --text-color: #333;
+  --radius: 8px;
+  --input-radius: 8px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+  .profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 0 20px;
+  }
+  .profile-info {
+    background: #e6f0ff;
+    padding: 16px;
+    border-radius: 8px;
+  }
+  .profile-actions {
+  margin-top: 12px;
+}
+.profile-actions a {
+  margin-right: 16px;
+  text-decoration: none;
+  color: var(--primary);
+}
+.profile-actions a:hover {
+  text-decoration: underline;
+}
+
+.logout-container {
+  margin-top: 20px; 
+}
+
+.logout-btn {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--input-radius);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.logout-btn:hover {
+  opacity: 0.9;
+}
+  .medicine-list-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    flex: 1 1 300px;
+  }
+  .profile-info h2 { 
+    margin-top: 0;
+    font-size: 1.5rem; 
+  }
+
+  /* medicine list */
+  .medicine-list-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .medicine-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .medicine-list-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
+  }
+  .add-medicine-btn {
+    background: var(--primary);
+    color: #fff;
+    padding: 6px 12px;
+    border: none;
+    border-radius: var(--input-radius);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .add-medicine-btn:hover { opacity: 0.9; }
+
+
+  .medicine-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .medicine-table th,
+  .medicine-table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  .medicine-table th {
+    background: var(--bg-page);
+    font-weight: bold;
+  }
+  .remove-btn {
+    background: none;
+    border: none;
+    color: #e63946;
+    cursor: pointer;
+  }
+  .remove-btn:hover { text-decoration: underline; }
+</style>
+{% endblock extra_styles %}
+
+{# ─── Main content of the page ─── #}
 {% block content %}
+<div class="profile-container">
 
-<div class="profile-card">
-  <h2>{{ user.get_full_name }}’s Profile</h2>
-  <p><strong>Email:</strong> {{ user.email }}</p>
-  <p><strong>Health status:</strong> {{ user.profile.health_status|linebreaks }}</p>
+  <!-- User Info Card -->
+  <div class="profile-info">
+    <h2>Profile Information</h2>
+    <p><strong>Name:</strong> {{ user.get_full_name }}</p>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Health status:</strong>{{ user.profile.health_status |linebreaks }}</p>
+    <div class="profile-actions">
+      <a href="{% url 'profile_edit' %}">Edit Profile</a>
+      <a href="{% url 'password_change' %}">Change Password</a>
+    </div>
 
-  <div class="profile-actions" style="margin-top:20px;">
-    <a href="{% url 'profile_edit' %}">Edit Info</a> |
-    <a href="{% url 'password_change' %}">Change Password</a>
-    <form method="post"
-        action="{% url 'logout' %}"
-        style="display:inline; margin-left:10px;">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-secondary">
-      Logout
-    </button>
-  </form>
-
+    <div class="logout-container">
+    <form method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="logout-btn">Logout</button>
+    </form>
+    </div>
   </div>
-</div>
 
-{% endblock %}
+  <!-- Medicine List Card -->
+  <div class="medicine-list-card">
+    <div class="medicine-list-header">
+      <h2>My Medicine List</h2>
+      <a href="{% url 'home' %}?search_type=medicine" class="add-medicine-btn">
+        + Add Medicine
+      </a>
+    </div>
+    <table class="medicine-table">
+      <thead>
+        <tr>
+          <th>Medicine Name</th>
+          <th>Category</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for med in medicines %}
+        <tr>
+          <td><a href="{% url 'medicine_detail' med.id %}">{{ med.name }}</a></td>
+          <td>{{ med.category.name }}</td>
+          <td>
+            <form method="post"
+                  action="{% url 'remove_from_medicine_list' med.id %}"
+                  style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="remove-btn">Remove</button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3"><em>No medicines added yet.</em></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock content %}
