@@ -3,179 +3,174 @@
 
 {% block extra_styles %}
 <style>
-:root {
-    --primary: #4da3ff;
-    --light-bg: #f8f9fa;
-    --card-bg: #e6f0ff;
-    --title-font: 32px;
-    --text-font: 16px;
-    --name-font: 18px;
-}
+    :root {
+        --primary: #4da3ff;
+        --light-bg: #f8f9fa;
+        --card-bg: #e6f0ff;
+        --title-font: 32px;
+        --text-font: 16px;
+        --name-font: 18px;
+    }
 
-/* HERO */
-.hero {
-    position: relative;
-    background: url("{% static 'images/banner_meds.jpg' %}") center/cover no-repeat;
-    color: white;
-    text-align: center;
-    padding: 100px 20px;
-    z-index: 1;
-}
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: -1;
-}
-.hero h1 {
-    font-size: var(--title-font);
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-.hero p {
-    font-size: var(--text-font);
-    max-width: 700px;
-    margin: auto;
-}
+    .hero {
+        position: relative;
+        background: url("{% static 'images/banner_meds.jpg' %}") center/cover no-repeat;
+        color: white;
+        text-align: center;
+        padding: 100px 20px;
+        z-index: 1;
+    }
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: -1;
+    }
+    .hero h1 {
+        font-size: var(--title-font);
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .hero p {
+        font-size: var(--text-font);
+        max-width: 700px;
+        margin: auto;
+    }
 
-/* TEAM */
-.team-section {
-    background: var(--light-bg);
-    text-align: center;
-    padding: 60px 20px;
-}
-.team-section h2 {
-    font-size: var(--title-font);
-    margin-bottom: 40px;
-}
-.team-grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 40px;
-}
-.team-member img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--primary);
-}
-.team-member p {
-    margin-top: 10px;
-    font-size: var(--text-font);
-}
-.team-member p strong {
-    display: block;
-    font-size: var(--name-font);
-    margin-bottom: 4px;
-}
+    .team-section {
+        background: var(--light-bg);
+        text-align: center;
+        padding: 60px 20px;
+    }
+    .team-section h2 {
+        font-size: var(--title-font);
+        margin-bottom: 40px;
+    }
+    .team-grid {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+    .team-member img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--primary);
+    }
+    .team-member p {
+        margin-top: 10px;
+        font-size: var(--text-font);
+    }
+    .team-member p strong {
+        display: block;
+        font-size: var(--name-font);
+        margin-bottom: 4px;
+    }
 
-/* TIMELINE */
-.timeline-vertical {
-    background: var(--light-bg);
-    padding: 60px 20px;
-    position: relative;
-}
-.timeline-container {
-    position: relative;
-    width: 90%;
-    margin: auto;
-    max-width: 1000px;
-}
-.timeline-line {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: var(--primary);
-    transform: translateX(-50%);
-}
-.timeline-line::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 12px solid var(--primary);
-}
-.timeline-entry {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    position: relative;
-    margin: 40px 0;
-}
-.timeline-entry.right {
-    justify-content: flex-end;
-}
-.timeline-card {
-    background: var(--card-bg);
-    padding: 25px 30px;
-    border-radius: 12px;
-    width: 40%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-left: 6px solid var(--primary);
-    transition: transform 0.3s ease;
-}
-.timeline-card:hover {
-    transform: scale(1.02);
-}
-.timeline-card h3 {
-    font-size: 20px;
-    margin-top: 0;
-    font-weight: bold;
-}
-.timeline-card p {
-    font-size: var(--text-font);
-    margin-bottom: 0;
-}
+    .timeline-vertical {
+        background: var(--light-bg);
+        padding: 60px 20px;
+        position: relative;
+    }
+    .timeline-container {
+        position: relative;
+        width: 90%;
+        margin: auto;
+        max-width: 1000px;
+    }
+    .timeline-line {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: var(--primary);
+        transform: translateX(-50%);
+    }
+    .timeline-line::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 12px solid var(--primary);
+    }
+    .timeline-entry {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        position: relative;
+        margin: 40px 0;
+    }
+    .timeline-entry.right {
+        justify-content: flex-end;
+    }
+    .timeline-card {
+        background: var(--card-bg);
+        padding: 25px 30px;
+        border-radius: 12px;
+        width: 40%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-left: 6px solid var(--primary);
+        transition: transform 0.3s ease;
+    }
+    .timeline-card:hover {
+        transform: scale(1.02);
+    }
+    .timeline-card h3 {
+        font-size: 20px;
+        margin-top: 0;
+        font-weight: bold;
+    }
+    .timeline-card p {
+        font-size: var(--text-font);
+        margin-bottom: 0;
+    }
 
-/* VALUES */
-.values-section {
-    background: var(--light-bg);
-    padding: 60px 20px;
-    text-align: center;
-}
-.values-section h2 {
-    font-size: var(--title-font);
-    margin-bottom: 30px;
-}
-.values-grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 40px;
-}
-.value-item {
-    max-width: 200px;
-}
-.value-item img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 15px;
-}
-.value-item p {
-    font-size: var(--text-font);
-}
-</style>
+    .values-section {
+        background: var(--light-bg);
+        padding: 60px 20px;
+        text-align: center;
+    }
+    .values-section h2 {
+        font-size: var(--title-font);
+        margin-bottom: 30px;
+    }
+    .values-grid {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+    .value-item {
+        max-width: 200px;
+    }
+    .value-item img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+    }
+    .value-item p {
+        font-size: var(--text-font);
+    }
+    </style>
 {% endblock %}
 
 {% block content %}
-<!-- HERO -->
+
 <section class="hero">
     <h1>About MediQuick</h1>
     <p>Empowering users with reliable and accessible medicine information.</p>
 </section>
 
-<!-- TEAM -->
 <section class="team-section">
     <h2>Meet Our Team</h2>
     <div class="team-grid">
@@ -193,7 +188,6 @@
         </div>
     </div>
 </section>
-
 
 <section class="timeline-vertical">
     <div class="timeline-container">
@@ -221,7 +215,6 @@
         </div>
     </div>
 </section>
-
 
 <section class="values-section">
     <h2>Our Values</h2>

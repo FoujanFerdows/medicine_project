@@ -2,7 +2,7 @@
 
 {% block title %}Home - MediQuick{% endblock %}
 
-{% load static %}  <!-- Ensure this is added to load static files -->
+{% load static %}  
 
 {% block extra_styles %}
     <style>
@@ -13,7 +13,7 @@
         justify-content: center;
         text-align: center;
         padding: 20px;
-        margin-top: 20px;  /* Make sure the hero section is below the fixed top bar */
+        margin-top: 20px;  
         }
         .hero-title {
         font-size: 36px;
@@ -34,7 +34,7 @@
         align-items: center;
         gap: 12px;
         max-width: 600px;
-        margin: 20px auto;      /* center form on page */
+        margin: 20px auto;     
         }
 
         .search-main {
@@ -92,9 +92,9 @@
         margin: 30px auto;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;         /* center all the links */
+        justify-content: center;         
         gap: 10px;
-        max-width: 600px;                /* optional: constrain width */
+        max-width: 600px;               
         }
         .alphabet-filter a {
         text-decoration: none;
@@ -130,16 +130,13 @@
 
 {% block content %}
    
-<!-- Hero Section -->
       <div class="hero-section">
             <div class="hero-title">We understand your needs</div>
             <p class="hero-description">
             MediQuick enables you to quickly access information about your medicines
             </p>
-            <!-- Keep the search form here if you want it in the hero -->
             <form method="get" action="{% url 'home' %}" class="search-box">
 
-  <!-- Row 1: the pill -->
   <div class="search-main">
     <input
       type="text"
@@ -150,7 +147,6 @@
     <button type="submit">Search</button>
   </div>
 
-  <!-- Row 2: the radios -->
   <div class="search-toggle">
     <label>
       <input
@@ -174,7 +170,6 @@
 </form>
     </div>
 
-    <!-- Alphabet filter positioned below the search box -->
     <div class="alphabet-filter">
         {% for char in alphabet %}
             <a href="?letter={{ char }}" class="{% if letter == char %}active{% endif %}">
@@ -183,14 +178,12 @@
         {% endfor %}
     </div>
         
-        <!-- Medicine Search Results -->
         {% if medicines %}
         <div class="medicine-list">
                 <h3>Search Results:</h3>
                 {% for medicine in medicines %}
                     <div class="medicine-item">
                         <h4>
-                            <!-- Link to Medicine Detail Page -->
                             <a href="{% url 'medicine_detail' pk=medicine.pk %}">{{ medicine.name }}</a>
                         </h4>
                         <p>{{ medicine.description }}</p>
