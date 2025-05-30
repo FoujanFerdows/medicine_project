@@ -1,10 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Medicine, Symptom, ShoppingList  # Import Symptom model for symptom search
+from .models import Medicine, Symptom, MedicineList, ContactSubmission
 from django.core.mail import send_mail
 from django.conf import settings
 
 from .forms import ContactForm
-from .models import ContactSubmission
 
 from django.shortcuts           import render, redirect
 from django.contrib.auth        import login
@@ -62,26 +61,20 @@ def medicine_detail(request, pk):
     return render(request, 'catalog/medicine_detail.html', {'medicine': medicine})
 
 # Add to shopping list view
-def add_to_shopping_list(request, medicine_id):
+def add_to_medicine_list(request, medicine_id):
     # Fetch the medicine object based on the provided ID
     medicine = get_object_or_404(Medicine, id=medicine_id)
+    ml, _ = MedicineList.objects.get_or_create(user=request.user)
+    ml.medicines.add(medicine)
+    return redirect('medicine_detail', pk=medicine.id)
 
-    if request.user.is_authenticated:
-        # Fetch the user's shopping list, or create one if it doesn't exist
-        shopping_list, created = ShoppingList.objects.get_or_create(user=request.user)
-        
-        # Add the medicine to the shopping list
-        shopping_list.medicines.add(medicine)
-        
-        # Save the shopping list
-        shopping_list.save()
-
-        # Redirect back to the medicine detail page after adding
-        return redirect('medicine_detail', pk=medicine.id)
-    else:
-        # If the user is not authenticated, redirect them to the login page
-        return redirect('login')  # Update this to your login URL name
-
+# Remove from shopping list view
+def remove_from_medicine_list(request, medicine_id):
+    ml, _ = MedicineList.objects.get_or_create(user=request.user)
+    medicine = get_object_or_404(Medicine, id=medicine_id)
+    ml.medicines.remove(medicine)
+    return redirect('profile')
+    
 # About page view
 def about(request):
     return render(request, 'catalog/about.html')
@@ -137,7 +130,9 @@ def signup(request):
 
 @login_required
 def profile(request):
-    return render(request, 'catalog/profile.html')
+    ml, _ = MedicineList.objects.get_or_create(user=request.user)
+    meds = ml.medicines.all().order_by('category__name', 'name')
+    return render(request, 'catalog/profile.html', {'medicine_list': ml, 'medicines': meds})
 
 @login_required
 def profile_edit(request):
@@ -160,4 +155,4 @@ def profile_edit(request):
 class MyPasswordChangeView(PasswordChangeView):
     template_name      = 'catalog/password_change.html'
     success_url        = reverse_lazy('profile')
-
+ 
