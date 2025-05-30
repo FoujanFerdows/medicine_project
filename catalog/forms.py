@@ -40,7 +40,7 @@ class SignUpForm(UserCreationForm):
     health_status = forms.CharField(
         widget=forms.Textarea(attrs={'rows':3}),
         required=False,
-        label="Current Health Status"
+        label="Health Status"
     )
 
     class Meta:
