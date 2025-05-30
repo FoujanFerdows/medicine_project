@@ -17,3 +17,4 @@ class ContactSubmissionAdmin(admin.ModelAdmin):
 class ProfileAdmin(admin.ModelAdmin):
     list_display   = ('user', 'phone', 'updated_at')
     search_fields  = ('user__username', 'user__email', 'phone')
+    
