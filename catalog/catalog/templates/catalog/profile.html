@@ -6,7 +6,6 @@
 {# ─── Page-specific CSS ─── #}
 {% block extra_styles %}
 <style>
-  /* ─── layout ─── */
   :root {
   --primary: #4da3ff;
   --bg-page: #f4f4f4;
@@ -70,7 +69,6 @@
     font-size: 1.5rem; 
   }
 
-  /* medicine list */
   .medicine-list-card {
     display: flex;
     flex-direction: column;
@@ -126,7 +124,6 @@
 {% block content %}
 <div class="profile-container">
 
-  <!-- User Info Card -->
   <div class="profile-info">
     <h2>Profile Information</h2>
     <p><strong>Name:</strong> {{ user.get_full_name }}</p>
@@ -146,13 +143,10 @@
     </div>
   </div>
 
-  <!-- Medicine List Card -->
   <div class="medicine-list-card">
     <div class="medicine-list-header">
       <h2>My Medicine List</h2>
-      <a href="{% url 'home' %}?search_type=medicine" class="add-medicine-btn">
-        + Add Medicine
-      </a>
+      <a href="{% url 'home' %}?search_type=medicine" class="add-medicine-btn">+ Add Medicine</a>
     </div>
     <table class="medicine-table">
       <thead>

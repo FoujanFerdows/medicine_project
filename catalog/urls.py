@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.landing, name='landing'),
-    path('home/', views.home, name='home'), # Home view with search and letter filter
+    path('home/', views.home, name='home'), 
     path('medicine/<int:pk>/', views.medicine_detail, name='medicine_detail'),
     path('add_to_medicine_list/<int:medicine_id>/', views.add_to_medicine_list, name='add_to_medicine_list'),
     path('remove_from_medicine_list/<int:medicine_id>/', views.remove_from_medicine_list, name='remove_from_medicine_list'),

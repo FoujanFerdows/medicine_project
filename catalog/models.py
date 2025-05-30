@@ -34,7 +34,7 @@ class Medicine(models.Model):
         return self.name
 
 
-# New Symptom model for symptom-based search
+
 class Symptom(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -43,13 +43,14 @@ class Symptom(models.Model):
         return self.name
 
 
-# New Medicine List
+
 class MedicineList(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='medicine_lists')
     medicines = models.ManyToManyField('Medicine', blank=True, related_name='medicine_lists')
     
     def __str__(self):
         return f"Medicine List for {self.user.username}"
+
 
 class ContactSubmission(models.Model):
     title       = models.CharField(max_length=150)
@@ -60,12 +61,14 @@ class ContactSubmission(models.Model):
     def __str__(self):
         return f"{self.title} from {self.email}"
 
+
 class Profile(models.Model):
     user           = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     health_status  = models.TextField(blank=True)
 
     def __str__(self):
         return f"Profile of {self.user.username}"
+
 
 @receiver(post_save, sender=User)
 def ensure_profile_exists(sender, instance, created, **kwargs):

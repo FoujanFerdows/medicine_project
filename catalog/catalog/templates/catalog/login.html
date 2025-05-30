@@ -2,7 +2,7 @@
 
 {% block title %}Login - MediQuick{% endblock %}
 
-{% load static %}  <!-- Ensure this is added to load static files -->
+{% load static %}  
 
 {% block extra_styles %}
     <style>
@@ -36,7 +36,7 @@
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box; /* Ensures padding doesn't push beyond the width */
+            box-sizing: border-box; 
         }
         .password-container {
             position: relative;
@@ -119,7 +119,6 @@
     </div>
 
     <script>
-        // Function to toggle password visibility
         function togglePasswordVisibility() {
             var passwordField = document.getElementById("password");
             var eyeIcon = document.querySelector(".eye-icon");
