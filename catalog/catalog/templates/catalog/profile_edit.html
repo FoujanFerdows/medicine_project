@@ -1,11 +1,115 @@
 {% extends 'catalog/base.html' %}
+{% load static %}
+
 {% block title %}Edit Profile – MediQuick{% endblock %}
+
+{% block extra_styles %}
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 60px auto;
+        }
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        .form-container button {
+            background-color: #4cc9f0;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            display: block;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .form-container button:hover {
+            background: #3399ff;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .form-footer a {
+            color: #4cc9f0;
+            text-decoration: none;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-  <h2>Edit Your Info</h2>
+<div class="form-container">
+  <h1>Edit Profile</h1>
   <form method="post">
     {% csrf_token %}
-    {{ u_form.as_p }}
-    {{ p_form.as_p }}
+    {{ u_form.non_field_errors }}
+    <div>
+      {{ u_form.username.label_tag }}
+      {{ u_form.username }}
+      {{ u_form.username.errors }}
+    </div>
+    <div>
+      {{ u_form.email.label_tag }}
+      {{ u_form.email }}
+      {{ u_form.email.errors }}
+    </div>
+    <div>
+      {{ u_form.first_name.label_tag }}
+      {{ u_form.first_name }}
+      {{ u_form.first_name.errors }}
+    </div>
+    <div>
+      {{ u_form.last_name.label_tag }}
+      {{ u_form.last_name }}
+      {{ u_form.last_name.errors }}
+    </div>
+    <div>
+      {{ p_form.health_status.label_tag }}
+      {{ p_form.health_status }}
+      {{ p_form.health_status.errors }}
+    </div>
     <button type="submit">Save Changes</button>
   </form>
+
+  <div class="form-footer">
+    <p><a href="{% url 'profile' %}">← Back to Profile</a></p>
+  </div>
+</div>
 {% endblock %}
