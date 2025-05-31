@@ -58,7 +58,7 @@ def add_to_medicine_list(request, medicine_id):
     medicine = get_object_or_404(Medicine, id=medicine_id)
     ml, _ = MedicineList.objects.get_or_create(user=request.user)
     ml.medicines.add(medicine)
-    return redirect('medicine_detail', pk=medicine.id)
+    return redirect(reverse_lazy('profile'))
 
 
 def remove_from_medicine_list(request, medicine_id):

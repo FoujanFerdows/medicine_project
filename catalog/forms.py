@@ -40,7 +40,7 @@ class SignUpForm(UserCreationForm):
     health_status = forms.CharField(
         widget=forms.Textarea(attrs={'rows':3}),
         required=False,
-        label="health_status"
+        label="Health Status",
     )
 
     class Meta:
@@ -53,7 +53,10 @@ class SignUpForm(UserCreationForm):
         user.last_name  = self.cleaned_data['last_name']
         user.email      = self.cleaned_data['email']
         if commit:
-            user.save()           
+            user.save()
+            profile = user.profile
+            profile.health_status = self.cleaned_data.get('health_status', '')
+            profile.save()         
         return user
 
 class UserUpdateForm(forms.ModelForm):

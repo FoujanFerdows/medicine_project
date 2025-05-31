@@ -42,7 +42,7 @@
       font-family: inherit;
       font-size: 16px;
     }
-    .signup-button {
+    .signup-container button {
       background-color: #4cc9f0;
       color: white;
       padding: 12px;
@@ -56,7 +56,7 @@
       cursor: pointer;
       margin-top: 10px;
     }
-    .signup-button:hover {
+    .signup-container button:hover {
       background-color: #3a8fbd;
     }
     .back-to-home {
@@ -77,10 +77,18 @@
   <div class="signup-container">
     <h1>Create an Account</h1>
     <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="signup-button">Sign Up</button>
-    </form>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.username.label_tag }}      {{ form.username }}      {{ form.username.errors }}
+        {{ form.first_name.label_tag }}    {{ form.first_name }}    {{ form.first_name.errors }}
+        {{ form.last_name.label_tag }}     {{ form.last_name }}     {{ form.last_name.errors }}
+        {{ form.email.label_tag }}         {{ form.email }}         {{ form.email.errors }}
+        {{ form.health_status.label_tag }} {{ form.health_status }} {{ form.health_status.errors }}
+        {{ form.password1.label_tag }}     {{ form.password1 }}     {{ form.password1.errors }}
+        {{ form.password2.label_tag }}     {{ form.password2 }}     {{ form.password2.errors }}
+
+        <button type="submit">Sign up</button>
+      </form>
     <div class="back-to-home">
       <p><a href="/">Back to Home</a></p>
     </div>
